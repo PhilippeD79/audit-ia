@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Séquence 3 : Devenir Pilote de l'IA — Protocole A.U.D.I.T.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --couleur-fond: #FAFAFA;
+            --couleur-texte: #1a1a1a;
+            --couleur-accent: #1E3A5F;
+            --couleur-accent-hover: #2B4A6F;
+            --couleur-accent-clair: #E3EDF7;
+            --couleur-or: #D4A847;
+            --couleur-or-clair: #FDF6E3;
+            --couleur-college: #2D6A4F;
+            --couleur-college-clair: #D8F3DC;
+            --couleur-college-bg: #F0FDF4;
+            --couleur-lycee: #7B2D8E;
+            --couleur-lycee-clair: #F3E5F5;
+            --couleur-lycee-bg: #FAF5FF;
+            --couleur-gris: #5C6370;
+            --couleur-gris-clair: #F5F5F5;
+            --font-titre: 'Source Serif 4', Georgia, serif;
+            --font-corps: 'IBM Plex Sans', system-ui, sans-serif;
+            --max-width: 800px;
+            --espacement: 2rem;
+            --ombre-legere: 0 2px 8px rgba(0,0,0,0.08);
+            --ombre-moyenne: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-corps);
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--couleur-fond);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            z-index: 100;
+            padding: 1rem var(--espacement);
+        }
+
+        nav .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--couleur-accent);
+            text-decoration: none;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+
+        nav a {
+            color: var(--couleur-texte);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--couleur-accent); }
+
+        .retour {
+            padding: 6rem var(--espacement) 1rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .retour a {
+            color: var(--couleur-gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .retour a:hover { color: var(--couleur-accent); }
+
+        .sequence-header {
+            padding: 2rem var(--espacement) 2rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .sequence-numero {
+            font-family: var(--font-titre);
+            font-size: 1rem;
+            color: var(--couleur-accent);
+            opacity: 0.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .sequence-titre {
+            font-family: var(--font-titre);
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .sequence-accroche {
+            font-size: 1.15rem;
+            color: var(--couleur-gris);
+            max-width: 600px;
+        }
+
+        /* Onglets */
+        .onglets-container {
+            padding: 0 var(--espacement);
+            max-width: var(--max-width);
+            margin: 2rem auto 0;
+        }
+
+        .onglets {
+            display: flex;
+            gap: 0.5rem;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+        }
+
+        .onglet {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            color: var(--couleur-gris);
+            transition: color 0.2s;
+        }
+
+        .onglet::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: transparent;
+            transition: background 0.2s;
+        }
+
+        .onglet:hover { color: var(--couleur-texte); }
+
+        .onglet.actif-college { color: var(--couleur-college); }
+        .onglet.actif-college::after { background: var(--couleur-college); }
+
+        .onglet.actif-lycee { color: var(--couleur-lycee); }
+        .onglet.actif-lycee::after { background: var(--couleur-lycee); }
+
+        .badge-niveau {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .badge-college { background: var(--couleur-college-clair); color: var(--couleur-college); }
+        .badge-lycee { background: var(--couleur-lycee-clair); color: var(--couleur-lycee); }
+
+        .contenu-niveau { display: none; }
+        .contenu-niveau.actif { display: block; }
+
+        article {
+            padding: 2rem var(--espacement) 3rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        article h2 {
+            font-family: var(--font-titre);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1rem;
+        }
+
+        article h2:first-of-type { margin-top: 0; }
+        article p { margin-bottom: 1rem; }
+        article ul { margin: 1rem 0 1rem 1.5rem; }
+        article li { margin-bottom: 0.5rem; }
+
+        .encart {
+            background: white;
+            border-left: 4px solid var(--couleur-accent);
+            padding: 1.5rem;
+            margin: 0 0 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .encart.college { border-left-color: var(--couleur-college); }
+        .encart.lycee { border-left-color: var(--couleur-lycee); }
+
+        .encart h3 {
+            font-family: var(--font-titre);
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            color: var(--couleur-accent);
+        }
+
+        .encart.college h3 { color: var(--couleur-college); }
+        .encart.lycee h3 { color: var(--couleur-lycee); }
+
+        .encart ul { margin: 0; padding-left: 1.2rem; }
+        .encart li { margin-bottom: 0.4rem; }
+
+        /* Encart idée clé */
+        .idee-cle {
+            background: #FEF9E7;
+            border: 1px solid #F7DC6F;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .idee-cle h3 {
+            font-family: var(--font-titre);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #9A7B0A;
+        }
+
+        .idee-cle p {
+            margin: 0 0 1rem 0;
+            color: #7D6608;
+        }
+
+        .idee-cle p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Tableau comparatif IA vs Humain */
+        .comparatif {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .comparatif-col {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .comparatif-col.ia {
+            border-top: 3px solid #E74C3C;
+        }
+
+        .comparatif-col.humain {
+            border-top: 3px solid #27AE60;
+        }
+
+        .comparatif-col h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comparatif-col p {
+            font-size: 0.95rem;
+            color: var(--couleur-gris);
+            margin-bottom: 0.5rem;
+        }
+
+        .comparatif-col p:last-child {
+            margin-bottom: 0;
+            font-weight: 500;
+            color: var(--couleur-texte);
+        }
+
+        /* Récap des 3 alertes */
+        .recap-alertes {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .recap-alertes-header {
+            background: var(--couleur-accent);
+            color: white;
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+        }
+
+        .alerte-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            align-items: center;
+        }
+
+        .alerte-item:last-child {
+            border-bottom: none;
+        }
+
+        .alerte-num {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--couleur-accent);
+            opacity: 0.5;
+        }
+
+        .alerte-contenu h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .alerte-contenu p {
+            font-size: 0.9rem;
+            color: var(--couleur-gris);
+            margin: 0;
+        }
+
+        .alerte-danger {
+            font-size: 0.85rem;
+            color: #E74C3C;
+            text-align: right;
+        }
+
+        /* Les 3 zones du Pilote */
+        .zones {
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .zone {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            padding: 1.25rem;
+            border-radius: 8px;
+            align-items: start;
+        }
+
+        .zone.verte { background: #E8F5E9; }
+        .zone.orange { background: #FFF3E0; }
+        .zone.rouge { background: #FFEBEE; }
+
+        .zone-icon {
+            font-size: 1.5rem;
+        }
+
+        .zone-contenu h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .zone.verte .zone-contenu h4 { color: #2E7D32; }
+        .zone.orange .zone-contenu h4 { color: #E65100; }
+        .zone.rouge .zone-contenu h4 { color: #C62828; }
+
+        .zone-contenu p {
+            font-size: 0.95rem;
+            margin: 0;
+            color: var(--couleur-gris);
+        }
+
+        .zone-exemple {
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 0.5rem;
+        }
+
+        /* Analogie */
+        .analogie {
+            background: #F3E5F5;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+        }
+
+        .analogie::before {
+            content: '💬';
+            font-style: normal;
+            margin-right: 0.5rem;
+        }
+
+        .deroule {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .deroule-header {
+            padding: 1rem 1.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .deroule-header.college { background: var(--couleur-college-clair); color: var(--couleur-college); }
+        .deroule-header.lycee { background: var(--couleur-lycee-clair); color: var(--couleur-lycee); }
+
+        .deroule-etape {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .deroule-etape:last-child { border-bottom: none; }
+
+        .deroule-etape-titre {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .deroule-etape-num {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            opacity: 0.5;
+        }
+
+        .college .deroule-etape-num { color: var(--couleur-college); }
+        .lycee .deroule-etape-num { color: var(--couleur-lycee); }
+
+        .deroule-etape-nom { font-weight: 600; }
+
+        .deroule-etape-duree {
+            font-size: 0.85rem;
+            color: var(--couleur-gris);
+            margin-left: auto;
+        }
+
+        .deroule-etape p, .deroule-etape ul {
+            font-size: 0.95rem;
+            color: var(--couleur-gris);
+            margin: 0;
+        }
+
+        .deroule-etape ul {
+            margin-top: 0.5rem;
+            padding-left: 1.2rem;
+        }
+
+        .deroule-etape li {
+            margin-bottom: 0.25rem;
+        }
+
+        /* Règle d'or */
+        .regle-or {
+            background: linear-gradient(135deg, #2B4A6F 0%, #1a3a5c 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .regle-or h3 {
+            font-family: var(--font-titre);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .regle-or p {
+            font-size: 1.1rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .regle-or strong {
+            color: #F7DC6F;
+        }
+
+        .ressources-section {
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+
+        .ressources-section.college { background: var(--couleur-college-clair); }
+        .ressources-section.lycee { background: var(--couleur-lycee-clair); }
+
+        .ressources-section h2 { margin-top: 0; }
+        .ressources-section.college h2 { color: var(--couleur-college); }
+        .ressources-section.lycee h2 { color: var(--couleur-lycee); }
+
+        .ressources-liste {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .ressource-lien {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.2rem;
+            background: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: box-shadow 0.2s;
+        }
+
+        .ressources-section.college .ressource-lien { color: var(--couleur-college); }
+        .ressources-section.lycee .ressource-lien { color: var(--couleur-lycee); }
+
+        .ressource-lien:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .ressource-lien svg { width: 16px; height: 16px; }
+
+        .section-commune {
+            padding: 0 var(--espacement) 2rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .section-commune h2 {
+            font-family: var(--font-titre);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+        }
+
+        .section-commune ul { margin: 1rem 0 1rem 1.5rem; }
+        .section-commune li { margin-bottom: 0.5rem; }
+
+        /* Message version à venir */
+        .version-a-venir {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--couleur-gris);
+        }
+
+        .version-a-venir p {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .version-a-venir span {
+            font-size: 0.9rem;
+        }
+
+        .nav-sequences {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem var(--espacement);
+            border-top: 1px solid rgba(0,0,0,0.08);
+            margin-top: 2rem;
+            max-width: var(--max-width);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav-seq-lien {
+            text-decoration: none;
+            color: var(--couleur-texte);
+        }
+
+        .nav-seq-lien:hover .nav-seq-titre { color: var(--couleur-accent); }
+
+        .nav-seq-direction {
+            font-size: 0.85rem;
+            color: var(--couleur-gris);
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-seq-titre {
+            font-family: var(--font-titre);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-seq-lien.precedent { text-align: left; }
+        .nav-seq-lien.suivant { text-align: right; }
+
+        footer {
+            text-align: center;
+            padding: 3rem var(--espacement);
+            color: var(--couleur-gris);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        footer a { color: var(--couleur-accent); text-decoration: none; }
+
+        @media (max-width: 600px) {
+            .onglet { flex: 1; text-align: center; padding: 0.75rem 0.5rem; }
+            .comparatif { grid-template-columns: 1fr; }
+            .deroule-etape-titre { flex-wrap: wrap; }
+            .deroule-etape-duree { width: 100%; margin-left: 0; margin-top: 0.25rem; }
+            .nav-sequences { flex-direction: column; gap: 1.5rem; }
+            .nav-seq-lien.suivant { text-align: left; }
+            .alerte-item { grid-template-columns: 1fr; gap: 0.5rem; }
+            .alerte-danger { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">A.U.D.I.T.</a>
+            <ul>
+                <li><a href="index.html#protocole">Protocole</a></li>
+                <li><a href="index.html#ressources">Ressources</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="retour">
+        <a href="index.html">← Retour au protocole</a>
+    </div>
+
+    <header class="sequence-header">
+        <p class="sequence-numero">Séquence 03</p>
+        <h1 class="sequence-titre">Devenir Pilote de l'IA</h1>
+        <p class="sequence-accroche">Comprendre que l'IA ne raisonne pas vraiment et apprendre à décider quand l'utiliser — pour passer d'utilisateur naïf à pilote éclairé.</p>
+    </header>
+
+    <div class="onglets-container">
+        <div class="onglets">
+            <button class="onglet actif-college" data-niveau="college" onclick="changerNiveau('college')">
+                Collège <span class="badge-niveau badge-college">Cycle 4</span>
+            </button>
+            <button class="onglet" data-niveau="lycee" onclick="changerNiveau('lycee')">
+                Lycée <span class="badge-niveau badge-lycee">2de — Tle</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- COLLÈGE -->
+    <div class="contenu-niveau college actif" id="contenu-college">
+        <article>
+            <div class="encart college">
+                <h3>Objectifs — Collège</h3>
+                <ul>
+                    <li>Voir que l'IA rate les tâches de logique (dessins, cartes, schémas)</li>
+                    <li>Comprendre pourquoi : l'IA devine le pixel suivant, elle ne vérifie jamais</li>
+                    <li>Décider quand utiliser l'IA grâce aux 3 zones (Vert, Orange, Rouge)</li>
+                    <li>Créer une Charte d'Usage pour savoir quand faire confiance à l'IA</li>
+                </ul>
+            </div>
+
+            <div class="idee-cle">
+                <h3>🧠 L'idée clé — L'IA DEVINE, elle ne RÉFLÉCHIT pas</h3>
+                <p>Quand l'IA fait une image, elle se demande : « Quel pixel vient probablement après celui-là ? »</p>
+                <p>Elle ne se demande JAMAIS : « Est-ce que mon dessin a du sens ? »</p>
+            </div>
+
+            <p class="analogie">« L'IA, c'est comme quelqu'un qui récite une recette de cuisine sans jamais avoir cuisiné. Il connaît les mots dans l'ordre, mais il ne sait pas que le gâteau va brûler si le four est trop chaud. Il récite, il ne comprend pas. »</p>
+
+            <h2>La différence entre deviner et réfléchir</h2>
+
+            <div class="comparatif">
+                <div class="comparatif-col ia">
+                    <h4>🤖 L'IA DEVINE</h4>
+                    <p>« Quel pixel vient après ? »</p>
+                    <p>Elle avance sans vérifier</p>
+                    <p>Résultat : joli mais FAUX</p>
+                </div>
+                <div class="comparatif-col humain">
+                    <h4>🧠 L'HUMAIN RÉFLÉCHIT</h4>
+                    <p>« Est-ce que ça a du sens ? »</p>
+                    <p>Il vérifie à chaque étape</p>
+                    <p>Résultat : peut-être moche mais JUSTE</p>
+                </div>
+            </div>
+
+            <h2>Récap : les 3 alertes du Pilote</h2>
+
+            <div class="recap-alertes">
+                <div class="recap-alertes-header">🚨 Ce que tu as appris</div>
+                <div class="alerte-item">
+                    <span class="alerte-num">1</span>
+                    <div class="alerte-contenu">
+                        <h4>🔍 ALERTE STYLE</h4>
+                        <p>L'IA écrit toujours pareil (mots compliqués, listes...)</p>
+                    </div>
+                    <span class="alerte-danger">→ On lui fait confiance</span>
+                </div>
+                <div class="alerte-item">
+                    <span class="alerte-num">2</span>
+                    <div class="alerte-contenu">
+                        <h4>🎯 ALERTE VÉRITÉ</h4>
+                        <p>L'IA peut mentir ou inventer des choses fausses</p>
+                    </div>
+                    <span class="alerte-danger">→ On recopie des erreurs</span>
+                </div>
+                <div class="alerte-item">
+                    <span class="alerte-num">3</span>
+                    <div class="alerte-contenu">
+                        <h4>🧠 ALERTE LOGIQUE</h4>
+                        <p>L'IA devine, elle ne réfléchit pas vraiment</p>
+                    </div>
+                    <span class="alerte-danger">→ Elle rate les problèmes</span>
+                </div>
+            </div>
+
+            <h2>Les 3 zones du Pilote</h2>
+
+            <div class="zones">
+                <div class="zone verte">
+                    <span class="zone-icon">🟢</span>
+                    <div class="zone-contenu">
+                        <h4>ZONE VERTE — C'est OK</h4>
+                        <p>L'IA peut aider sans danger</p>
+                        <p class="zone-exemple">Ex : chercher des synonymes, avoir des idées</p>
+                    </div>
+                </div>
+                <div class="zone orange">
+                    <span class="zone-icon">🟠</span>
+                    <div class="zone-contenu">
+                        <h4>ZONE ORANGE — Vérifier !</h4>
+                        <p>L'IA peut aider MAIS tu dois tout vérifier</p>
+                        <p class="zone-exemple">Ex : chercher une date, reformuler un texte</p>
+                    </div>
+                </div>
+                <div class="zone rouge">
+                    <span class="zone-icon">🔴</span>
+                    <div class="zone-contenu">
+                        <h4>ZONE ROUGE — Interdit !</h4>
+                        <p>L'IA ne peut PAS t'aider, c'est toi qui dois réfléchir</p>
+                        <p class="zone-exemple">Ex : résoudre un exercice de maths, rédiger un devoir noté</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Déroulé proposé</h2>
+            <div class="deroule college">
+                <div class="deroule-header college">Séance de 1h15 à 1h30 — 4e/3e</div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">1</span>
+                        <span class="deroule-etape-nom">Les ratés de l'IA</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p>Projeter 2-3 images du document « Échecs de l'IA » :</p>
+                    <ul>
+                        <li>Le triangle rectangle raté — l'IA ne sait pas placer l'angle droit</li>
+                        <li>La carte d'Europe fausse — les pays sont mal placés</li>
+                        <li>Le schéma de Venn absurde — les animaux sont dans les mauvaises cases</li>
+                    </ul>
+                    <p>Question à poser : « Le prompt était correct. Qu'est-ce qui a raté ? »</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">2</span>
+                        <span class="deroule-etape-nom">Comprendre pourquoi</span>
+                        <span class="deroule-etape-duree">15 min</span>
+                    </div>
+                    <p>Expliquer la différence entre deviner et réfléchir (tableau comparatif).</p>
+                    <p>Question clé : « Qu'est-ce qu'un humain aurait fait que l'IA n'a pas fait ? » → Vérifier si le résultat a du sens !</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">3</span>
+                        <span class="deroule-etape-nom">Les 3 zones du Pilote</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p>Présenter les 3 zones, puis exercice de vote à main levée :</p>
+                    <ul>
+                        <li>« J'utilise l'IA pour trouver des idées de plan » → 🟢 🟠 🔴 ?</li>
+                        <li>« J'utilise l'IA pour résoudre mon exercice de géométrie » → 🟢 🟠 🔴 ?</li>
+                        <li>« J'utilise l'IA pour traduire un mot en anglais » → 🟢 🟠 🔴 ?</li>
+                        <li>« Je recopie la réponse de l'IA pour mon contrôle de SVT » → 🟢 🟠 🔴 ?</li>
+                    </ul>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">4</span>
+                        <span class="deroule-etape-nom">Notre Charte de Pilote</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p>En classe entière, créer la Charte d'Usage :</p>
+                    <ul>
+                        <li>Trouver 1 exemple pour la zone VERTE</li>
+                        <li>Trouver 1 exemple pour la zone ORANGE (+ comment vérifier)</li>
+                        <li>Trouver 1 exemple pour la zone ROUGE (+ pourquoi c'est interdit)</li>
+                    </ul>
+                    <p>💡 Idée : Afficher la Charte dans la classe. On pourra la modifier dans un mois si certaines règles ne marchent pas.</p>
+                </div>
+            </div>
+
+            <div class="regle-or">
+                <h3>🏆 LA RÈGLE D'OR DU PILOTE</h3>
+                <p>L'IA est ton <strong>copilote</strong>, pas ton commandant.<br>
+                C'est <strong>TOI</strong> qui décides. C'est <strong>TOI</strong> qui vérifies. C'est <strong>TOI</strong> qui as le dernier mot.</p>
+            </div>
+
+            <h2>Comment savoir si ça a marché ?</h2>
+            <ul>
+                <li><strong>Il voit les erreurs de l'IA</strong> — Il peut montrer ce qui ne va pas dans l'image</li>
+                <li><strong>Il comprend pourquoi l'IA rate</strong> — Il peut dire : « L'IA devine, elle ne vérifie pas »</li>
+                <li><strong>Il sait utiliser les 3 zones</strong> — Il peut classer une situation en 🟢, 🟠 ou 🔴</li>
+                <li><strong>Il connaît les 3 alertes</strong> — Il peut citer : Style, Vérité, Logique</li>
+            </ul>
+
+            <div class="ressources-section college">
+                <h2>Ressources — Collège</h2>
+                <div class="ressources-liste">
+                    <a href="ressources/college/sequence-3/S3-College-Guide-Enseignant.pdf" target="_blank" class="ressource-lien">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Guide enseignant
+                    </a>
+                    <a href="ressources/college/sequence-3/S3-College-Echecs-IA-Images.pdf" target="_blank" class="ressource-lien">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Échecs de l'IA (images)
+                    </a>
+                    <a href="ressources/college/sequence-3/S3-College-Fiche-Eleve-Pilote.pdf" target="_blank" class="ressource-lien">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Fiche Bilan du Pilote
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <!-- LYCÉE -->
+    <div class="contenu-niveau lycee" id="contenu-lycee">
+        <article>
+            <div class="encart lycee">
+                <h3>Objectifs — Lycée</h3>
+                <ul>
+                    <li>Identifier les erreurs de raisonnement dans une production visuelle de l'IA</li>
+                    <li>Expliquer la différence entre prédiction statistique et raisonnement déductif</li>
+                    <li>Corriger manuellement une production IA en mobilisant son propre raisonnement</li>
+                    <li>Synthétiser les 3 faiblesses de l'IA découvertes dans le protocole A.U.D.I.T.</li>
+                    <li>Rédiger une Charte d'Usage structurée en 3 zones (libre, auditée, interdite)</li>
+                </ul>
+            </div>
+
+            <div class="idee-cle">
+                <h3>🧠 Le concept clé — Prédiction vs Raisonnement</h3>
+                <p>L'IA est un excellent <strong>prédicteur</strong> (elle calcule le mot ou pixel le plus probable après les précédents), mais elle ne possède pas de capacité de <strong>raisonnement déductif</strong> (si A alors B, vérification de cohérence globale).</p>
+                <p>Conséquence : Confrontée à une tâche nécessitant un raisonnement spatial, logique ou déductif, l'IA produit des résultats visuellement absurdes — même si elle les décrit avec assurance.</p>
+            </div>
+
+            <p class="analogie">« L'IA est comme quelqu'un qui récite une recette de cuisine sans jamais avoir cuisiné. Il connaît les mots, mais il ne sait pas que le gâteau va brûler si le four est trop chaud. Il prédit les mots, il ne comprend pas le processus. »</p>
+
+            <h2>La différence fondamentale</h2>
+
+            <div class="comparatif">
+                <div class="comparatif-col ia">
+                    <h4>🤖 L'IA : Prédiction</h4>
+                    <p>« Après ces pixels, quels pixels sont les plus probables ? »</p>
+                    <p>Fonctionne pixel par pixel, sans vision globale</p>
+                    <p>Ne « comprend » pas les relations spatiales</p>
+                    <p>Peut produire une image « belle » mais fausse</p>
+                </div>
+                <div class="comparatif-col humain">
+                    <h4>🧠 L'Humain : Raisonnement</h4>
+                    <p>« Si c'est un triangle rectangle 3-4-5, alors l'angle droit est ici. »</p>
+                    <p>Vérifie la cohérence de l'ensemble</p>
+                    <p>Applique des règles logiques (Si A, alors B)</p>
+                    <p>Peut produire un brouillon correct</p>
+                </div>
+            </div>
+
+            <h2>Synthèse A.U.D.I.T. — Les 3 faiblesses</h2>
+
+            <div class="recap-alertes">
+                <div class="recap-alertes-header">🚨 Ce que le protocole a prouvé</div>
+                <div class="alerte-item">
+                    <span class="alerte-num">S1</span>
+                    <div class="alerte-contenu">
+                        <h4>Le Masque Stylistique</h4>
+                        <p>L'IA a un style par défaut reconnaissable (mots savants, listes, jargon)</p>
+                    </div>
+                    <span class="alerte-danger">→ Inspire confiance à tort</span>
+                </div>
+                <div class="alerte-item">
+                    <span class="alerte-num">S2</span>
+                    <div class="alerte-contenu">
+                        <h4>Le Mensonge Factuel</h4>
+                        <p>L'IA peut affirmer des faits faux avec assurance</p>
+                    </div>
+                    <span class="alerte-danger">→ Désinformation, erreurs graves</span>
+                </div>
+                <div class="alerte-item">
+                    <span class="alerte-num">S3</span>
+                    <div class="alerte-contenu">
+                        <h4>L'Échec du Raisonnement</h4>
+                        <p>L'IA prédit, elle ne raisonne pas</p>
+                    </div>
+                    <span class="alerte-danger">→ Erreurs dans les tâches logiques</span>
+                </div>
+            </div>
+
+            <h2>Les 3 Zones du Pilote</h2>
+
+            <div class="zones">
+                <div class="zone verte">
+                    <span class="zone-icon">🟢</span>
+                    <div class="zone-contenu">
+                        <h4>ZONE VERTE — Décollage autorisé</h4>
+                        <p>Aucune des 3 alertes n'est critique. L'IA peut aider librement.</p>
+                        <p class="zone-exemple">Ex : Chercher des synonymes, brainstorming d'idées, inspiration</p>
+                    </div>
+                </div>
+                <div class="zone orange">
+                    <span class="zone-icon">🟠</span>
+                    <div class="zone-contenu">
+                        <h4>ZONE ORANGE — Vol surveillé</h4>
+                        <p>Une alerte est active. Utilisation possible avec vérification obligatoire à 100%.</p>
+                        <p class="zone-exemple">Ex : Recherche de dates, reformulation de texte, traduction</p>
+                    </div>
+                </div>
+                <div class="zone rouge">
+                    <span class="zone-icon">🔴</span>
+                    <div class="zone-contenu">
+                        <h4>ZONE ROUGE — Vol interdit</h4>
+                        <p>Le raisonnement ou l'évaluation sont en jeu. L'IA doit être débranchée.</p>
+                        <p class="zone-exemple">Ex : Résolution de problèmes, rédaction évaluée, diagnostic</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Déroulé proposé</h2>
+            <div class="deroule lycee">
+                <div class="deroule-header lycee">Séquence de 2h à 2h30 — Lycée (ou 2 séances d'1h15)</div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">1</span>
+                        <span class="deroule-etape-nom">L'Absurde Visuel</span>
+                        <span class="deroule-etape-duree">25 min</span>
+                    </div>
+                    <p>Projeter 2-3 images pré-générées montrant des échecs de l'IA :</p>
+                    <ul>
+                        <li>Triangle rectangle 3-4-5 avec angle droit mal placé</li>
+                        <li>Carte d'Europe avec pays mal positionnés</li>
+                        <li>Diagramme de Venn avec animaux mal classés</li>
+                    </ul>
+                    <p>« Le prompt était correct et précis. Qu'est-ce qui ne va pas ? »</p>
+                    <p>Distribution de la Grille d'Analyse des Erreurs.</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">2</span>
+                        <span class="deroule-etape-nom">Comprendre l'Échec</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p>Mini-exposé sur la différence prédiction/raisonnement (tableau comparatif).</p>
+                    <p>Partager l'analogie de la recette de cuisine.</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">3</span>
+                        <span class="deroule-etape-nom">Le Triomphe du Raisonnement Humain</span>
+                        <span class="deroule-etape-duree">25 min</span>
+                    </div>
+                    <p>Chaque groupe corrige manuellement une des images IA sur papier.</p>
+                    <p>Comparaison visuelle : image IA (fausse) vs correction humaine (juste).</p>
+                    <p>Discussion : « Qu'avez-vous fait que l'IA n'a pas su faire ? »</p>
+                    <p><strong>Conclusion</strong> : « L'humain vérifie, déduit, corrige. L'IA génère sans comprendre. »</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">4</span>
+                        <span class="deroule-etape-nom">Synthèse A.U.D.I.T.</span>
+                        <span class="deroule-etape-duree">15 min</span>
+                    </div>
+                    <p>Distribution de la Fiche Récapitulative A.U.D.I.T.</p>
+                    <p>Compléter ensemble le tableau des 3 faiblesses (Style, Fait, Raisonnement).</p>
+                    <p>Question de transition : « Comment décider quand utiliser l'IA et quand s'en méfier ? »</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">5</span>
+                        <span class="deroule-etape-nom">Dilemmes Éthiques</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p>Débat mouvant ou vote à main levée sur des scénarios :</p>
+                    <ul>
+                        <li>Un élève utilise l'IA pour reformuler son introduction de dissertation</li>
+                        <li>Un élève utilise l'IA pour trouver une date historique</li>
+                        <li>Un élève utilise l'IA pour résoudre un problème de géométrie</li>
+                        <li>Un médecin utilise l'IA pour poser un diagnostic</li>
+                    </ul>
+                    <p>Pour chaque scénario : « Quelle faiblesse de l'IA justifie votre positionnement ? »</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">6</span>
+                        <span class="deroule-etape-nom">La Charte d'Usage de la Classe</span>
+                        <span class="deroule-etape-duree">30 min</span>
+                    </div>
+                    <p>Chaque groupe propose :</p>
+                    <ul>
+                        <li>2 situations en Zone Verte (avec justification)</li>
+                        <li>2 situations en Zone Orange (avec méthode de vérification)</li>
+                        <li>2 situations en Zone Rouge (avec justification liée aux alertes)</li>
+                    </ul>
+                    <p>Vote pour retenir les meilleures propositions. La Charte finale est affichée dans la salle.</p>
+                    <p>💡 Option : Charte évolutive révisée après un mois d'expérimentation.</p>
+                </div>
+            </div>
+
+            <div class="regle-or">
+                <h3>🏆 LA RÈGLE D'OR DU PILOTE</h3>
+                <p>L'IA est ton <strong>copilote</strong>, pas ton commandant.<br>
+                C'est <strong>TOI</strong> qui décides. C'est <strong>TOI</strong> qui vérifies. C'est <strong>TOI</strong> qui as le dernier mot.</p>
+            </div>
+
+            <h2>Critères d'évaluation</h2>
+            <ul>
+                <li><strong>Analyse de l'échec</strong> — L'élève identifie au moins 2 erreurs de raisonnement et les explique</li>
+                <li><strong>Compréhension conceptuelle</strong> — L'élève explique la différence prédiction/raisonnement avec un exemple</li>
+                <li><strong>Correction humaine</strong> — L'élève produit une correction valide de l'image IA</li>
+                <li><strong>Synthèse A.U.D.I.T.</strong> — L'élève relie les 3 faiblesses dans ses justifications</li>
+                <li><strong>Production de la Charte</strong> — Les propositions sont pertinentes et justifiées par les alertes</li>
+            </ul>
+
+            <div class="ressources-section lycee">
+                <h2>Ressources — Lycée</h2>
+                <div class="ressources-liste">
+                    <a href="ressources/lycee/sequence-3/S3-Lycee-Guide-Enseignant.pdf" target="_blank" class="ressource-lien">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Guide enseignant
+                    </a>
+                    <a href="ressources/lycee/sequence-3/S3-Lycee-Echecs-IA-Images.pdf" target="_blank" class="ressource-lien">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Banque d'échecs visuels
+                    </a>
+                    <a href="ressources/lycee/sequence-3/S3-Lycee-Fiches-Eleves.pdf" target="_blank" class="ressource-lien">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Rapport d'Incident du Pilote
+                    </a>
+                    <a href="ressources/lycee/sequence-3/S3-Lycee-Fiches-Eleves.pdf" target="_blank" class="ressource-lien">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Charte d'Usage de l'IA
+                    </a>
+                    <a href="ressources/lycee/sequence-3/S3-Lycee-Fiches-Eleves.pdf" target="_blank" class="ressource-lien">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Tableau de Bord du Pilote
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div class="section-commune">
+        <h2>Message de fin</h2>
+        <p>« Vous avez terminé le protocole A.U.D.I.T. Vous n'êtes plus des utilisateurs naïfs de l'IA. Vous êtes maintenant des <strong>PILOTES</strong>. Vous savez quand l'IA peut vous aider, quand il faut vérifier, et quand il faut réfléchir par vous-même. C'est VOUS qui décidez, pas la machine. »</p>
+    </div>
+
+    <nav class="nav-sequences">
+        <a href="sequence-2.html" class="nav-seq-lien precedent">
+            <p class="nav-seq-direction">← Séquence précédente</p>
+            <p class="nav-seq-titre">Piéger l'IA</p>
+        </a>
+        <a href="sequence-4.html" class="nav-seq-lien suivant">
+            <p class="nav-seq-direction">Séquence suivante →</p>
+            <p class="nav-seq-titre">Repérer les biais</p>
+        </a>
+    </nav>
+
+    <footer>
+        <p>Protocole A.U.D.I.T. — <a href="index.html">Retour à l'accueil</a></p>
+    </footer>
+
+    <script>
+        function changerNiveau(niveau) {
+            document.querySelectorAll('.contenu-niveau').forEach(el => el.classList.remove('actif'));
+            document.getElementById('contenu-' + niveau).classList.add('actif');
+            
+            document.querySelectorAll('.onglet').forEach(el => {
+                el.classList.remove('actif-college', 'actif-lycee');
+            });
+            document.querySelector('.onglet[data-niveau="' + niveau + '"]').classList.add('actif-' + niveau);
+        }
+    </script>
+<script data-goatcounter="https://pdupeyrat.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

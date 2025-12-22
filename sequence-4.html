@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Séquence 4 : Repérer les biais — Protocole A.U.D.I.T.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --couleur-fond: #FAFAFA;
+            --couleur-texte: #1a1a1a;
+            --couleur-accent: #1E3A5F;
+            --couleur-accent-hover: #2B4A6F;
+            --couleur-accent-clair: #E3EDF7;
+            --couleur-or: #D4A847;
+            --couleur-or-clair: #FDF6E3;
+            --couleur-gris: #5C6370;
+            --couleur-gris-clair: #F5F5F5;
+            --font-titre: 'Source Serif 4', Georgia, serif;
+            --font-corps: 'IBM Plex Sans', system-ui, sans-serif;
+            --max-width: 800px;
+            --espacement: 2rem;
+            --ombre-legere: 0 2px 8px rgba(0,0,0,0.08);
+            --ombre-moyenne: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-corps);
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--couleur-fond);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            z-index: 100;
+            padding: 1rem var(--espacement);
+        }
+
+        nav .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--couleur-accent);
+            text-decoration: none;
+        }
+
+        nav ul { display: flex; list-style: none; gap: 2rem; }
+
+        nav a {
+            color: var(--couleur-texte);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--couleur-accent); }
+
+        .retour {
+            padding: 6rem var(--espacement) 1rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .retour a {
+            color: var(--couleur-gris);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .retour a:hover { color: var(--couleur-accent); }
+
+        .sequence-header {
+            padding: 2rem var(--espacement) 2rem;
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .sequence-numero {
+            font-family: var(--font-titre);
+            font-size: 1rem;
+            color: var(--couleur-accent);
+            opacity: 0.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .sequence-titre {
+            font-family: var(--font-titre);
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .sequence-accroche {
+            font-size: 1.15rem;
+            color: var(--couleur-gris);
+            max-width: 600px;
+        }
+
+        .en-construction {
+            max-width: var(--max-width);
+            margin: 3rem auto;
+            padding: 4rem var(--espacement);
+            text-align: center;
+        }
+
+        .en-construction-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .en-construction h2 {
+            font-family: var(--font-titre);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--couleur-accent);
+        }
+
+        .en-construction p {
+            color: var(--couleur-gris);
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+
+        .apercu {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            max-width: var(--max-width);
+            margin: 0 auto 3rem;
+            text-align: left;
+        }
+
+        .apercu h3 {
+            font-family: var(--font-titre);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--couleur-accent);
+        }
+
+        .apercu ul {
+            margin: 0;
+            padding-left: 1.5rem;
+        }
+
+        .apercu li {
+            margin-bottom: 0.5rem;
+            color: var(--couleur-gris);
+        }
+
+        .nav-sequences {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem var(--espacement);
+            border-top: 1px solid rgba(0,0,0,0.08);
+            margin-top: 2rem;
+            max-width: var(--max-width);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .nav-seq-lien {
+            text-decoration: none;
+            color: var(--couleur-texte);
+        }
+
+        .nav-seq-lien:hover .nav-seq-titre { color: var(--couleur-accent); }
+
+        .nav-seq-direction {
+            font-size: 0.85rem;
+            color: var(--couleur-gris);
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-seq-titre {
+            font-family: var(--font-titre);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-seq-lien.precedent { text-align: left; }
+        .nav-seq-lien.suivant { text-align: right; opacity: 0.3; pointer-events: none; }
+
+        footer {
+            text-align: center;
+            padding: 3rem var(--espacement);
+            color: var(--couleur-gris);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        footer a { color: var(--couleur-accent); text-decoration: none; }
+
+        @media (max-width: 600px) {
+            .nav-sequences { flex-direction: column; gap: 1.5rem; }
+            .nav-seq-lien.suivant { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">A.U.D.I.T.</a>
+            <ul>
+                <li><a href="index.html#protocole">Protocole</a></li>
+                <li><a href="index.html#ressources">Ressources</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="retour">
+        <a href="index.html">← Retour au protocole</a>
+    </div>
+
+    <header class="sequence-header">
+        <p class="sequence-numero">Séquence 04</p>
+        <h1 class="sequence-titre">Repérer les biais de l'IA</h1>
+        <p class="sequence-accroche">Découvrir comment l'IA peut reproduire et amplifier des stéréotypes — et apprendre à les détecter.</p>
+    </header>
+
+    <div class="en-construction">
+        <div class="en-construction-icon">🚧</div>
+        <h2>Séquence en cours de développement</h2>
+        <p>Cette quatrième séquence du protocole A.U.D.I.T. est actuellement en préparation. Elle viendra compléter les trois alertes existantes par une quatrième dimension : les biais.</p>
+    </div>
+
+    <div class="apercu">
+        <h3>Aperçu des thèmes abordés</h3>
+        <ul>
+            <li>Les biais de genre dans les réponses de l'IA</li>
+            <li>Les stéréotypes reproduits par les modèles de langage</li>
+            <li>Le biais de confirmation : quand l'IA renforce nos erreurs</li>
+            <li>Méthodes pour détecter et questionner les biais</li>
+        </ul>
+    </div>
+
+    <nav class="nav-sequences">
+        <a href="sequence-3.html" class="nav-seq-lien precedent">
+            <p class="nav-seq-direction">← Séquence précédente</p>
+            <p class="nav-seq-titre">Devenir Pilote de l'IA</p>
+        </a>
+        <div class="nav-seq-lien suivant">
+            <p class="nav-seq-direction">Séquence suivante →</p>
+            <p class="nav-seq-titre">À venir</p>
+        </div>
+    </nav>
+
+    <footer>
+        <p>Protocole A.U.D.I.T. — <a href="index.html">Retour à l'accueil</a></p>
+    </footer>
+<script data-goatcounter="https://pdupeyrat.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

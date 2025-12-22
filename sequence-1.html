@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Séquence 1 : Détecter le style IA — Protocole A.U.D.I.T.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --couleur-fond: #FAFAFA;
+            --couleur-texte: #1a1a1a;
+            --couleur-accent: #1E3A5F;
+            --couleur-accent-hover: #2B4A6F;
+            --couleur-accent-clair: #E3EDF7;
+            --couleur-or: #D4A847;
+            --couleur-or-clair: #FDF6E3;
+            --couleur-college: #2D6A4F;
+            --couleur-college-clair: #D8F3DC;
+            --couleur-college-bg: #F0FDF4;
+            --couleur-lycee: #7B2D8E;
+            --couleur-lycee-clair: #F3E5F5;
+            --couleur-lycee-bg: #FAF5FF;
+            --couleur-gris: #5C6370;
+            --couleur-gris-clair: #F5F5F5;
+            --font-titre: 'Source Serif 4', Georgia, serif;
+            --font-corps: 'IBM Plex Sans', system-ui, sans-serif;
+            --max-width: 800px;
+            --espacement: 2rem;
+            --ombre-legere: 0 2px 8px rgba(0,0,0,0.08);
+            --ombre-moyenne: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-corps);
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            z-index: 100;
+            padding: 0.9rem var(--espacement);
+            box-shadow: var(--ombre-legere);
+        }
+
+        nav .nav-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--couleur-accent);
+            text-decoration: none;
+        }
+
+        nav .logo span { color: var(--couleur-or); }
+        nav ul { display: flex; list-style: none; gap: 2.5rem; }
+        nav a {
+            color: var(--couleur-gris);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--couleur-accent); }
+
+        /* Header séquence */
+        .sequence-hero {
+            background: linear-gradient(135deg, var(--couleur-accent) 0%, #2B4A6F 100%);
+            color: white;
+            padding: 7rem var(--espacement) 3rem;
+        }
+
+        .sequence-hero-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .sequence-hero h1 {
+            font-family: var(--font-titre);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .sequence-hero .accroche {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .sequence-badge {
+            display: inline-block;
+            background: var(--couleur-or);
+            color: var(--couleur-accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        /* Onglets */
+        .onglets-wrapper {
+            background: white;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            position: sticky;
+            top: 60px;
+            z-index: 50;
+        }
+
+        .onglets {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            padding: 0 var(--espacement);
+        }
+
+        .onglet {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            color: var(--couleur-gris);
+            transition: color 0.2s;
+        }
+
+        .onglet::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: transparent;
+            transition: background 0.2s;
+        }
+
+        .onglet:hover { color: var(--couleur-texte); }
+        .onglet.actif-college { color: var(--couleur-college); }
+        .onglet.actif-college::after { background: var(--couleur-college); }
+        .onglet.actif-lycee { color: var(--couleur-lycee); }
+        .onglet.actif-lycee::after { background: var(--couleur-lycee); }
+
+        .badge-niveau {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-college { background: var(--couleur-college-clair); color: var(--couleur-college); }
+        .badge-lycee { background: var(--couleur-lycee-clair); color: var(--couleur-lycee); }
+
+        /* Contenu */
+        .contenu-niveau { display: none; }
+        .contenu-niveau.actif { display: block; }
+
+        article {
+            padding: 3rem var(--espacement);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        article h2 {
+            font-family: var(--font-titre);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--couleur-accent);
+            margin: 3rem 0 1rem;
+        }
+
+        article h2:first-of-type { margin-top: 0; }
+        article p { margin-bottom: 1rem; }
+        article ul { margin: 1rem 0 1rem 1.5rem; }
+        article li { margin-bottom: 0.5rem; }
+
+        /* Encarts */
+        .encart {
+            background: white;
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin: 2rem 0;
+            box-shadow: var(--ombre-legere);
+            border-left: 4px solid var(--couleur-accent);
+        }
+
+        .encart.college { 
+            border-left-color: var(--couleur-college);
+            background: var(--couleur-college-bg);
+        }
+        .encart.lycee { 
+            border-left-color: var(--couleur-lycee);
+            background: var(--couleur-lycee-bg);
+        }
+
+        .encart h3 {
+            font-family: var(--font-titre);
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            color: var(--couleur-accent);
+        }
+
+        .encart.college h3 { color: var(--couleur-college); }
+        .encart.lycee h3 { color: var(--couleur-lycee); }
+        .encart ul { margin: 0; padding-left: 1.2rem; }
+        .encart li { margin-bottom: 0.4rem; }
+
+        /* Idée clé */
+        .idee-cle {
+            background: var(--couleur-or-clair);
+            border: 1px solid var(--couleur-or);
+            border-radius: 12px;
+            padding: 1.75rem;
+            margin: 2rem 0;
+        }
+
+        .idee-cle h3 {
+            font-family: var(--font-titre);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #9A7B0A;
+        }
+
+        .idee-cle p {
+            margin: 0 0 0.75rem 0;
+            color: #7D6608;
+        }
+
+        .idee-cle p:last-child { margin-bottom: 0; }
+
+        /* Types/Marqueurs */
+        .types-grid {
+            display: grid;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .type-carte {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1rem;
+            align-items: start;
+            box-shadow: var(--ombre-legere);
+        }
+
+        .type-icon {
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+
+        .type-contenu h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: var(--couleur-accent);
+        }
+
+        .type-contenu p {
+            font-size: 0.95rem;
+            color: var(--couleur-gris);
+            margin: 0;
+        }
+
+        .type-exemple {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--couleur-gris);
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid rgba(0,0,0,0.1);
+        }
+
+        /* Comparatif */
+        .comparatif {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .comparatif-col {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--ombre-legere);
+        }
+
+        .comparatif-col.ia { border-top: 4px solid #E74C3C; }
+        .comparatif-col.humain { border-top: 4px solid #27AE60; }
+
+        .comparatif-col h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .comparatif-col p {
+            font-size: 0.95rem;
+            color: var(--couleur-gris);
+            margin: 0;
+        }
+
+        /* Déroulé */
+        .deroule {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 2rem 0;
+            box-shadow: var(--ombre-legere);
+        }
+
+        .deroule-header {
+            padding: 1rem 1.5rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .deroule-header.college { background: var(--couleur-college); color: white; }
+        .deroule-header.lycee { background: var(--couleur-lycee); color: white; }
+
+        .deroule-etape {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .deroule-etape:last-child { border-bottom: none; }
+
+        .deroule-etape-titre {
+            display: flex;
+            align-items: baseline;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .deroule-etape-num {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            font-size: 1.5rem;
+            opacity: 0.3;
+        }
+
+        .college .deroule-etape-num { color: var(--couleur-college); }
+        .lycee .deroule-etape-num { color: var(--couleur-lycee); }
+
+        .deroule-etape-nom { font-weight: 700; font-size: 1.05rem; }
+
+        .deroule-etape-duree {
+            font-size: 0.85rem;
+            color: var(--couleur-gris);
+            margin-left: auto;
+            background: var(--couleur-gris-clair);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+        }
+
+        .deroule-etape p, .deroule-etape ul {
+            font-size: 0.95rem;
+            color: var(--couleur-gris);
+            margin: 0;
+        }
+
+        .deroule-etape ul {
+            margin-top: 0.5rem;
+            padding-left: 1.2rem;
+        }
+
+        .deroule-etape li { margin-bottom: 0.25rem; }
+
+        /* Ressources */
+        .ressources-section {
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 3rem 0;
+        }
+
+        .ressources-section.college { background: var(--couleur-college-clair); }
+        .ressources-section.lycee { background: var(--couleur-lycee-clair); }
+
+        .ressources-section h2 { 
+            margin-top: 0; 
+            font-size: 1.3rem;
+        }
+        .ressources-section.college h2 { color: var(--couleur-college); }
+        .ressources-section.lycee h2 { color: var(--couleur-lycee); }
+
+        .ressources-liste {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .ressource-lien {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: var(--ombre-legere);
+        }
+
+        .ressources-section.college .ressource-lien { color: var(--couleur-college); }
+        .ressources-section.lycee .ressource-lien { color: var(--couleur-lycee); }
+
+        .ressource-lien:hover { 
+            transform: translateY(-2px);
+            box-shadow: var(--ombre-moyenne); 
+        }
+
+        .ressource-lien svg { width: 18px; height: 18px; }
+
+        /* Section commune */
+        .section-commune {
+            background: var(--couleur-gris-clair);
+            padding: 2.5rem var(--espacement);
+            margin-top: 2rem;
+        }
+
+        .section-commune-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .section-commune h2 {
+            font-family: var(--font-titre);
+            font-size: 1.4rem;
+            color: var(--couleur-accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Navigation séquences */
+        .nav-sequences {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem var(--espacement);
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .nav-seq-lien {
+            text-decoration: none;
+            color: var(--couleur-texte);
+            padding: 1rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-seq-lien:hover { background: var(--couleur-gris-clair); }
+
+        .nav-seq-direction {
+            font-size: 0.85rem;
+            color: var(--couleur-gris);
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-seq-titre {
+            font-family: var(--font-titre);
+            font-weight: 600;
+            color: var(--couleur-accent);
+        }
+
+        .nav-seq-lien.precedent { text-align: left; }
+        .nav-seq-lien.suivant { text-align: right; }
+
+        /* Footer */
+        footer {
+            background: var(--couleur-accent);
+            color: white;
+            text-align: center;
+            padding: 2rem var(--espacement);
+        }
+
+        footer p { opacity: 0.8; font-size: 0.9rem; margin: 0; }
+        footer a { color: var(--couleur-or); text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .onglet { flex: 1; text-align: center; padding: 1rem 0.5rem; }
+            .comparatif { grid-template-columns: 1fr; }
+            .deroule-etape-titre { flex-wrap: wrap; }
+            .deroule-etape-duree { width: 100%; margin-left: 0; margin-top: 0.5rem; }
+            .nav-sequences { flex-direction: column; gap: 1rem; }
+            .nav-seq-lien.suivant { text-align: left; }
+            .type-carte { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">A.U.D.I.<span>T.</span></a>
+            <ul>
+                <li><a href="index.html#protocole">Protocole</a></li>
+                <li><a href="index.html#approche">Approche</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="sequence-hero">
+        <div class="sequence-hero-inner">
+            <p class="breadcrumb"><a href="index.html">Accueil</a> → Séquence 1</p>
+            <span class="sequence-badge">Séquence 01</span>
+            <h1>Détecter le style IA</h1>
+            <p class="accroche">L'IA a des tics d'écriture reconnaissables. Les élèves les découvrent en analysant des textes qu'ils ont eux-mêmes générés.</p>
+        </div>
+    </header>
+
+    <div class="onglets-wrapper">
+        <div class="onglets">
+            <button class="onglet actif-college" data-niveau="college" onclick="changerNiveau('college')">
+                Collège <span class="badge-niveau badge-college">4e-3e</span>
+            </button>
+            <button class="onglet" data-niveau="lycee" onclick="changerNiveau('lycee')">
+                Lycée <span class="badge-niveau badge-lycee">2de-Tle</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- COLLÈGE -->
+    <div class="contenu-niveau college actif" id="contenu-college">
+        <article>
+            <div class="encart college">
+                <h3>Objectifs — Collège</h3>
+                <ul>
+                    <li>Repérer les mots typiques de l'IA (mots compliqués, mots « vides », verbes flous)</li>
+                    <li>Comprendre pourquoi l'IA écrit comme ça (elle copie ce qu'elle a lu)</li>
+                    <li>Écrire différemment de l'IA (prouver qu'un humain peut faire mieux)</li>
+                </ul>
+            </div>
+
+            <div class="idee-cle">
+                <h3>💡 Le principe pédagogique</h3>
+                <p>Les élèves ne vont pas juste lire un texte d'IA. Ils vont en <strong>fabriquer un eux-mêmes</strong>, puis jouer au détective pour trouver ses défauts.</p>
+                <p>On ne dit pas aux élèves « l'IA a des défauts ». On leur fait <strong>découvrir ces défauts par eux-mêmes</strong>.</p>
+            </div>
+
+            <h2>Les 3 types de mots à repérer</h2>
+
+            <div class="types-grid">
+                <div class="type-carte">
+                    <span class="type-icon">🔴</span>
+                    <div class="type-contenu">
+                        <h4>MOTS COMPLIQUÉS</h4>
+                        <p>L'IA utilise des mots « savants » au lieu de mots simples. Ça fait sérieux, mais c'est souvent inutile.</p>
+                        <p class="type-exemple">« utiliser » au lieu de « se servir de » • « effectuer » au lieu de « faire »</p>
+                    </div>
+                </div>
+
+                <div class="type-carte">
+                    <span class="type-icon">🟡</span>
+                    <div class="type-contenu">
+                        <h4>MOTS « VIDES »</h4>
+                        <p>Des mots qui ont l'air importants mais qui ne disent rien. Test : enlève le mot, la phrase veut-elle toujours dire la même chose ?</p>
+                        <p class="type-exemple">fondamental • essentiel • crucial • vital • incontournable</p>
+                    </div>
+                </div>
+
+                <div class="type-carte">
+                    <span class="type-icon">🔵</span>
+                    <div class="type-contenu">
+                        <h4>VERBES FLOUS</h4>
+                        <p>Des verbes qui ne veulent pas dire grand-chose. L'IA les utilise pour rester vague.</p>
+                        <p class="type-exemple">explorer • aborder • permettre de • s'avérer • considérer</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Déroulé proposé</h2>
+            <div class="deroule college">
+                <div class="deroule-header college">Séance de 1h à 1h15 — 4e/3e</div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">1</span>
+                        <span class="deroule-etape-nom">Fabriquer un texte IA</span>
+                        <span class="deroule-etape-duree">10 min</span>
+                    </div>
+                    <p>En groupe de 3-4, choisir un thème simple : l'amitié, le sport, l'école, les vacances.</p>
+                    <p><strong>Prompt exact</strong> : « Écris un texte de 100 mots sur [thème choisi]. »</p>
+                    <p>⚠️ Pas d'autre consigne ! On veut voir comment l'IA écrit « toute seule ».</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">2</span>
+                        <span class="deroule-etape-nom">Chasse aux tics !</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p>Distribution de la Fiche Détective. Consigne :</p>
+                    <ul>
+                        <li>Surligne en <strong>rouge</strong> les mots compliqués</li>
+                        <li>Surligne en <strong>jaune</strong> les mots « vides »</li>
+                        <li>Surligne en <strong>bleu</strong> les verbes flous</li>
+                        <li>Compte combien tu en trouves !</li>
+                    </ul>
+                    <p><strong>Question clé</strong> : « Est-ce que vous aviez demandé à l'IA d'écrire comme ça ? Non ! Alors pourquoi elle le fait ? »</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">3</span>
+                        <span class="deroule-etape-nom">Comprendre pourquoi</span>
+                        <span class="deroule-etape-duree">10 min</span>
+                    </div>
+                    <p>Explication simple : « L'IA a lu des millions de textes sur Internet : des articles, des rapports, des documents officiels. Elle a appris que ces mots compliqués sont souvent utilisés dans les textes "sérieux". Alors elle les réutilise, même quand ce n'est pas nécessaire. Elle ne réfléchit pas : elle copie ce qu'elle a vu. »</p>
+                    <p><strong>Le danger</strong> : Si tout le monde copie l'IA, et que l'IA copie tout le monde... tout le monde finit par écrire pareil !</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">4</span>
+                        <span class="deroule-etape-nom">Écrire mieux que l'IA !</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p><strong>Défi</strong> : Réécrire le texte de l'IA en 50 mots avec ces règles :</p>
+                    <ul>
+                        <li>Zéro mot compliqué — que des mots simples</li>
+                        <li>Une image concrète — quelque chose qu'on peut voir, entendre ou toucher</li>
+                        <li>Un avis personnel — dire « je pense que » ou « j'aime » ou « je déteste »</li>
+                        <li>Une phrase courte — moins de 5 mots</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Exemple de transformation</h2>
+            <div class="comparatif">
+                <div class="comparatif-col ia">
+                    <h4>❌ Version IA</h4>
+                    <p>« L'amitié constitue un élément fondamental du développement personnel, permettant d'explorer des dimensions essentielles de l'existence. »</p>
+                </div>
+                <div class="comparatif-col humain">
+                    <h4>✓ Version humaine</h4>
+                    <p>« Mon meilleur ami sent toujours le chlore de la piscine. On se connaît depuis le CP. Je déteste quand il triche aux cartes. Mais bon, c'est mon pote. »</p>
+                </div>
+            </div>
+
+            <h2>Comment savoir si ça a marché ?</h2>
+            <ul>
+                <li><strong>Il sait repérer les tics de l'IA</strong> — Il trouve au moins 3 mots suspects dans le texte</li>
+                <li><strong>Il comprend pourquoi l'IA écrit comme ça</strong> — Il peut expliquer : « Elle copie ce qu'elle a lu »</li>
+                <li><strong>Il sait écrire différemment</strong> — Son texte contient une image concrète et un avis personnel</li>
+            </ul>
+
+            <div class="ressources-section college">
+                <h2>📥 Ressources — Collège</h2>
+                <div class="ressources-liste">
+                    <a href="ressources/college/sequence-1/S1-College-Guide-Enseignant.pdf" class="ressource-lien" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Guide enseignant
+                    </a>
+                    <a href="ressources/college/sequence-1/S1-College-Annexe-Tics-IA.pdf" class="ressource-lien" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Liste des tics IA
+                    </a>
+                    <a href="ressources/college/sequence-1/S1-College-Fiche-Eleve-Detective.pdf" class="ressource-lien" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Fiche élève Détective
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <!-- LYCÉE -->
+    <div class="contenu-niveau lycee" id="contenu-lycee">
+        <article>
+            <div class="encart lycee">
+                <h3>Objectifs — Lycée</h3>
+                <ul>
+                    <li>Identifier les 4 catégories de marqueurs stylistiques de l'IA (biais latin, mots gonflants, verbes mous, jargon corporate)</li>
+                    <li>Formuler et tester une hypothèse sur le comportement par défaut de l'IA</li>
+                    <li>Expliquer pourquoi l'IA écrit ainsi (corpus d'entraînement, optimisation, neutralité)</li>
+                    <li>Comprendre le danger de la Boucle de Rétroaction (uniformisation culturelle)</li>
+                    <li>Produire un texte délibérément « anti-IA » démontrant la maîtrise humaine du style</li>
+                </ul>
+            </div>
+
+            <h2>Principe pédagogique</h2>
+            <p><strong>L'expérimentation comme preuve</strong> : L'élève ne reçoit pas un texte IA préfabriqué à analyser. Il génère lui-même un texte avec un prompt neutre (sans consigne de style), puis constate les tics stylistiques qui apparaissent spontanément.</p>
+            <p><strong>Le contre-test comme validation</strong> : Pour prouver que ces tics sont structurels (liés à l'entraînement de l'IA) et non accidentels, l'élève demande ensuite à l'IA d'éviter ces tics. L'échec ou la difficulté de l'IA confirme l'hypothèse.</p>
+
+            <h2>Les 4 catégories de marqueurs</h2>
+
+            <div class="types-grid">
+                <div class="type-carte">
+                    <span class="type-icon">📚</span>
+                    <div class="type-contenu">
+                        <h4>BIAIS LATIN</h4>
+                        <p>L'IA préfère les mots savants au lieu de mots simples. Ça sonne « pro » mais c'est froid.</p>
+                        <p class="type-exemple">utiliser → se servir de • effectuer → faire • finaliser → terminer</p>
+                    </div>
+                </div>
+
+                <div class="type-carte">
+                    <span class="type-icon">🎈</span>
+                    <div class="type-contenu">
+                        <h4>MOTS GONFLANTS</h4>
+                        <p>Mots qui semblent importants mais sont vides. Test : supprime le mot, le sens reste-t-il ?</p>
+                        <p class="type-exemple">crucial • vital • essentiel • fondamental • incontournable</p>
+                    </div>
+                </div>
+
+                <div class="type-carte">
+                    <span class="type-icon">🌫️</span>
+                    <div class="type-contenu">
+                        <h4>VERBES MOUS</h4>
+                        <p>Verbes vagues qui n'engagent à rien et permettent à l'IA de rester floue.</p>
+                        <p class="type-exemple">explorer • aborder • considérer • permettre de • souligner</p>
+                    </div>
+                </div>
+
+                <div class="type-carte">
+                    <span class="type-icon">💼</span>
+                    <div class="type-contenu">
+                        <h4>JARGON CORPORATE</h4>
+                        <p>Vocabulaire de bureaux et de réunions absorbé depuis des millions de rapports.</p>
+                        <p class="type-exemple">synergies • leviers • parties prenantes • valeur ajoutée • feedback</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>Déroulé proposé</h2>
+            <div class="deroule lycee">
+                <div class="deroule-header lycee">Séquence de 1h45 à 2h — Lycée</div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">1</span>
+                        <span class="deroule-etape-nom">L'expérience aveugle</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p>Chaque groupe choisit un thème (amitié, sport, ville, école, voyages).</p>
+                    <p><strong>Prompt strictement neutre</strong> : « Écris un texte de 150 mots sur [thème]. » — Aucune autre consigne.</p>
+                    <p>Les élèves génèrent le texte et le conservent sans l'analyser encore.</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">2</span>
+                        <span class="deroule-etape-nom">La chasse aux marqueurs</span>
+                        <span class="deroule-etape-duree">30 min</span>
+                    </div>
+                    <p>Distribution du « Lexique du Détective IA » (4 catégories).</p>
+                    <ul>
+                        <li>Surligner chaque marqueur trouvé (couleur différente par catégorie)</li>
+                        <li>Cocher dans le Lexique et compter</li>
+                        <li>Noter les trouvailles supplémentaires</li>
+                    </ul>
+                    <p><strong>Question clé</strong> : « Aviez-vous demandé ces figures de style ? Non. Alors pourquoi l'IA les utilise-t-elle spontanément ? »</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">3</span>
+                        <span class="deroule-etape-nom">Le contre-test</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p><strong>Hypothèse à formuler</strong> : « Si ces tics sont structurels, l'IA devrait avoir du mal à les éviter, même si on le lui demande. »</p>
+                    <p><strong>Prompt de contre-test</strong> : « Écris 150 mots sur [même thème]. Interdiction d'utiliser : la règle de trois, les mots crucial/vital/essentiel/fondamental, les verbes explorer/aborder/permettre, le jargon d'entreprise. Sois concret, surprenant, avec des images sensorielles précises. »</p>
+                    <p>Observation : L'IA retombe dans ses tics, produit un texte bancal, ou remplace un tic par un autre.</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">4</span>
+                        <span class="deroule-etape-nom">Comprendre les causes</span>
+                        <span class="deroule-etape-duree">15 min</span>
+                    </div>
+                    <p>Les 4 causes du style IA :</p>
+                    <ul>
+                        <li><strong>Corpus d'entraînement</strong> : millions de textes « professionnels »</li>
+                        <li><strong>Optimisation vers le sérieux</strong> : le ton formel a été noté positivement</li>
+                        <li><strong>Évitement du risque</strong> : un mot abstrait est moins engageant</li>
+                        <li><strong>Neutralité imposée</strong> : évite les opinions tranchées → style fade</li>
+                    </ul>
+                    <p><strong>La Boucle de Rétroaction</strong> : L'IA nous imite → Nous l'imitons → Elle apprend nos imitations → Tout le monde écrit pareil !</p>
+                </div>
+                
+                <div class="deroule-etape">
+                    <div class="deroule-etape-titre">
+                        <span class="deroule-etape-num">5</span>
+                        <span class="deroule-etape-nom">Production : le texte « anti-défaut »</span>
+                        <span class="deroule-etape-duree">20 min</span>
+                    </div>
+                    <p>Réécrire le texte IA initial en 100 mots maximum :</p>
+                    <ul>
+                        <li>Supprimer tous les marqueurs identifiés</li>
+                        <li>Ajouter une image sensorielle concrète (voir, entendre, toucher)</li>
+                        <li>Exprimer une opinion personnelle assumée</li>
+                        <li>Varier le rythme : au moins une phrase très courte (< 5 mots)</li>
+                    </ul>
+                    <p>Lecture de quelques productions. Critère : le texte est-il identifiable comme « humain » ?</p>
+                </div>
+            </div>
+
+            <h2>Critères d'évaluation</h2>
+            <ul>
+                <li><strong>Diagnostic</strong> — L'élève identifie au moins 5 marqueurs sur au moins 2 catégories et justifie leur présence</li>
+                <li><strong>Expérimentation</strong> — L'élève formule l'hypothèse du contre-test et interprète le résultat</li>
+                <li><strong>Compréhension réflexive</strong> — L'élève explique au moins 2 causes et le principe de la Boucle de Rétroaction</li>
+                <li><strong>Production</strong> — Le texte « anti-défaut » contient une image concrète, une opinion assumée et un rythme varié</li>
+                <li><strong>Posture critique</strong> — L'élève conclut que le style IA est un premier signal d'alerte pour enclencher le doute</li>
+            </ul>
+
+            <div class="ressources-section lycee">
+                <h2>📥 Ressources — Lycée</h2>
+                <div class="ressources-liste">
+                    <a href="ressources/lycee/sequence-1/S1-Lycee-Guide-Enseignant.pdf" class="ressource-lien" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Guide enseignant
+                    </a>
+                    <a href="ressources/lycee/sequence-1/S1-Lycee-Banque-Marqueurs.pdf" class="ressource-lien" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Banque des Marqueurs
+                    </a>
+                    <a href="ressources/lycee/sequence-1/S1-Lycee-Fiche-Eleve-Lexique.pdf" class="ressource-lien" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                        Lexique du Détective IA
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <div class="section-commune">
+        <div class="section-commune-inner">
+            <h2>Transition vers la séquence 2</h2>
+            <p>« Vous avez prouvé que l'IA a un style reconnaissable — elle écrit 'proprement' mais de façon monotone. Mais un texte bien écrit peut-il être faux ? Dans la Séquence 2, nous allons tester si l'IA peut mentir… et si vous pouvez la piéger. »</p>
+            <p><strong>Le lien logique</strong> : Le Masque Stylistique (Séquence 1) est ce qui rend les erreurs factuelles de l'IA (Séquence 2) plus dangereuses : un texte « propre » et « professionnel » inspire confiance à tort.</p>
+        </div>
+    </div>
+
+    <nav class="nav-sequences">
+        <a href="index.html" class="nav-seq-lien precedent">
+            <p class="nav-seq-direction">← Retour</p>
+            <p class="nav-seq-titre">Accueil</p>
+        </a>
+        <a href="sequence-2.html" class="nav-seq-lien suivant">
+            <p class="nav-seq-direction">Séquence suivante →</p>
+            <p class="nav-seq-titre">Piéger l'IA</p>
+        </a>
+    </nav>
+
+    <footer>
+        <p>Protocole A.U.D.I.T. — <a href="mailto:philippe.dupeyrat@ac-poitiers.fr">Philippe Dupeyrat</a>, Académie de Poitiers</p>
+    </footer>
+
+    <script>
+        function changerNiveau(niveau) {
+            document.querySelectorAll('.contenu-niveau').forEach(el => el.classList.remove('actif'));
+            document.getElementById('contenu-' + niveau).classList.add('actif');
+            
+            document.querySelectorAll('.onglet').forEach(el => {
+                el.classList.remove('actif-college', 'actif-lycee');
+            });
+            document.querySelector('.onglet[data-niveau="' + niveau + '"]').classList.add('actif-' + niveau);
+        }
+    </script>
+<script data-goatcounter="https://pdupeyrat.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

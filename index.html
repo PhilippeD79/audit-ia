@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocole A.U.D.I.T. — Esprit critique et Intelligence Artificielle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --couleur-fond: #FAFAFA;
+            --couleur-texte: #1a1a1a;
+            --couleur-accent: #1E3A5F;
+            --couleur-accent-hover: #2B4A6F;
+            --couleur-accent-clair: #E3EDF7;
+            --couleur-or: #D4A847;
+            --couleur-or-clair: #FDF6E3;
+            --couleur-college: #2D6A4F;
+            --couleur-college-clair: #D8F3DC;
+            --couleur-lycee: #7B2D8E;
+            --couleur-lycee-clair: #F3E5F5;
+            --couleur-gris: #5C6370;
+            --couleur-gris-clair: #F5F5F5;
+            --font-titre: 'Source Serif 4', Georgia, serif;
+            --font-corps: 'IBM Plex Sans', system-ui, sans-serif;
+            --max-width: 800px;
+            --espacement: 2rem;
+            --ombre-legere: 0 2px 8px rgba(0,0,0,0.08);
+            --ombre-moyenne: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-corps);
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            z-index: 100;
+            padding: 0.9rem var(--espacement);
+            box-shadow: var(--ombre-legere);
+        }
+
+        nav .nav-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--couleur-accent);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        nav .logo span {
+            color: var(--couleur-or);
+        }
+
+        nav ul { display: flex; list-style: none; gap: 2.5rem; }
+
+        nav a {
+            color: var(--couleur-gris);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--couleur-accent); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--couleur-accent) 0%, #2B4A6F 100%);
+            color: white;
+            padding: 8rem var(--espacement) 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: var(--font-titre);
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            color: var(--couleur-or);
+        }
+
+        .hero .sous-titre {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem var(--espacement);
+        }
+
+        .section-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-family: var(--font-titre);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--couleur-accent);
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--couleur-or);
+            margin-top: 0.75rem;
+            border-radius: 2px;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        /* Cartes d'introduction */
+        .intro-cartes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .intro-carte {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--ombre-legere);
+            border: 1px solid rgba(0,0,0,0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .intro-carte:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--ombre-moyenne);
+        }
+
+        .intro-carte-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro-carte h3 {
+            font-family: var(--font-titre);
+            font-size: 1.2rem;
+            color: var(--couleur-accent);
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-carte p {
+            color: var(--couleur-gris);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        /* Section protocole */
+        .section-protocole {
+            background: white;
+        }
+
+        .sequences-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .sequence-carte {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.5rem;
+            align-items: center;
+            background: var(--couleur-fond);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .sequence-carte:hover {
+            border-color: var(--couleur-accent);
+            box-shadow: var(--ombre-legere);
+        }
+
+        .sequence-numero {
+            font-family: var(--font-titre);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--couleur-accent);
+            opacity: 0.2;
+            line-height: 1;
+        }
+
+        .sequence-carte:hover .sequence-numero {
+            opacity: 0.5;
+            color: var(--couleur-or);
+        }
+
+        .sequence-contenu h3 {
+            font-family: var(--font-titre);
+            font-size: 1.2rem;
+            color: var(--couleur-accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .sequence-contenu p {
+            color: var(--couleur-gris);
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .sequence-fleche {
+            font-size: 1.5rem;
+            color: var(--couleur-gris);
+            opacity: 0.3;
+            transition: all 0.2s;
+        }
+
+        .sequence-carte:hover .sequence-fleche {
+            opacity: 1;
+            color: var(--couleur-accent);
+            transform: translateX(4px);
+        }
+
+        .sequence-carte.en-construction {
+            opacity: 0.6;
+        }
+
+        .sequence-carte.en-construction:hover {
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        .badge-construction {
+            display: inline-block;
+            background: var(--couleur-or-clair);
+            color: #B8860B;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+        }
+
+        /* Section contact */
+        .section-contact {
+            background: var(--couleur-accent-clair);
+        }
+
+        .contact-box {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: var(--ombre-legere);
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            font-family: var(--font-titre);
+            font-size: 1.3rem;
+            color: var(--couleur-accent);
+            margin-bottom: 1rem;
+        }
+
+        .contact-box p {
+            color: var(--couleur-gris);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--couleur-accent);
+            color: white;
+            text-decoration: none;
+            padding: 0.9rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--couleur-accent-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--couleur-accent);
+            color: white;
+            text-align: center;
+            padding: 2.5rem var(--espacement);
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        footer a {
+            color: var(--couleur-or);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            nav ul { gap: 1.5rem; }
+            .hero { padding: 7rem var(--espacement) 3rem; }
+            .sequence-carte { 
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1rem;
+            }
+            .sequence-numero { font-size: 2rem; }
+            .sequence-fleche { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">A.U.D.I.<span>T.</span></a>
+            <ul>
+                <li><a href="#protocole">Protocole</a></li>
+                <li><a href="#approche">Approche</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Esprit critique et <span>Intelligence Artificielle</span></h1>
+        <p class="sous-titre">Des séquences pédagogiques pour apprendre aux élèves à utiliser l'IA avec discernement.</p>
+        <span class="badge">Protocole A.U.D.I.T. — Collège & Lycée</span>
+    </header>
+
+    <section id="approche">
+        <div class="section-inner">
+            <h2>Le constat</h2>
+            <p>Les élèves utilisent l'IA. Massivement. Souvent sans recul. Le discours moralisateur — « c'est de la triche », « tu ne développes pas ton cerveau » — ne fonctionne pas. Il culpabilise sans convaincre.</p>
+            
+            <div class="intro-cartes">
+                <div class="intro-carte">
+                    <div class="intro-carte-icon">🔬</div>
+                    <h3>L'approche</h3>
+                    <p>Faire expérimenter plutôt qu'avertir. L'élève piège l'IA, constate ses failles, et tire ses propres conclusions. La prise de conscience vient de l'intérieur.</p>
+                </div>
+                <div class="intro-carte">
+                    <div class="intro-carte-icon">🎯</div>
+                    <h3>L'objectif</h3>
+                    <p>Former des « Pilotes de l'IA » : des utilisateurs capables de repérer les faiblesses de la machine et de décider quand lui faire confiance.</p>
+                </div>
+                <div class="intro-carte">
+                    <div class="intro-carte-icon">📦</div>
+                    <h3>Ce que vous trouverez</h3>
+                    <p>Des scénarios testables en classe, avec guides enseignant et fiches élèves. Pas de grandes théories : du concret, du testable, de l'adaptable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-protocole" id="protocole">
+        <div class="section-inner">
+            <h2>Les séquences</h2>
+            <p>Trois alertes à découvrir, une posture à construire. Chaque séquence existe en version Collège et Lycée.</p>
+
+            <div class="sequences-grid">
+                <a href="sequence-1.html" class="sequence-carte">
+                    <span class="sequence-numero">01</span>
+                    <div class="sequence-contenu">
+                        <h3>Détecter le style IA</h3>
+                        <p>L'IA a des tics d'écriture reconnaissables. Les élèves les découvrent en analysant des textes qu'ils ont eux-mêmes générés.</p>
+                    </div>
+                    <span class="sequence-fleche">→</span>
+                </a>
+
+                <a href="sequence-2.html" class="sequence-carte">
+                    <span class="sequence-numero">02</span>
+                    <div class="sequence-contenu">
+                        <h3>Piéger l'IA : peut-elle mentir ?</h3>
+                        <p>L'IA peut affirmer des choses fausses avec assurance. Les élèves lui tendent des pièges pour le prouver.</p>
+                    </div>
+                    <span class="sequence-fleche">→</span>
+                </a>
+
+                <a href="sequence-3.html" class="sequence-carte">
+                    <span class="sequence-numero">03</span>
+                    <div class="sequence-contenu">
+                        <h3>Devenir Pilote de l'IA</h3>
+                        <p>L'IA ne raisonne pas, elle prédit. Les élèves le constatent et construisent leur propre charte d'usage.</p>
+                    </div>
+                    <span class="sequence-fleche">→</span>
+                </a>
+
+                <a href="sequence-4.html" class="sequence-carte en-construction">
+                    <span class="sequence-numero">04</span>
+                    <div class="sequence-contenu">
+                        <h3>Repérer les biais <span class="badge-construction">En construction</span></h3>
+                        <p>L'IA peut reproduire et amplifier des stéréotypes. Une quatrième alerte à venir.</p>
+                    </div>
+                    <span class="sequence-fleche">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-contact" id="contact">
+        <div class="section-inner">
+            <div class="contact-box">
+                <h3>Vos retours m'intéressent</h3>
+                <p>Ces séquences sont en évolution. Si vous les testez en classe, vos observations — ce qui fonctionne, ce qui coince, ce que vous avez adapté — me seront précieuses.</p>
+                <a href="mailto:philippe.dupeyrat@ac-poitiers.fr" class="btn">Me contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Protocole A.U.D.I.T. — Conçu par <a href="mailto:philippe.dupeyrat@ac-poitiers.fr">Philippe Dupeyrat</a>, IA-IPR de mathématiques, Académie de Poitiers</p>
+    </footer>
+<script data-goatcounter="https://pdupeyrat.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
