@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Séquence 4 : Repérer les biais — Protocole A.U.D.I.T.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --couleur-fond: #FAFAFA;
+            --couleur-texte: #1a1a1a;
+            --couleur-accent: #1E3A5F;
+            --couleur-accent-hover: #2B4A6F;
+            --couleur-accent-clair: #E3EDF7;
+            --couleur-or: #D4A847;
+            --couleur-or-clair: #FDF6E3;
+            --couleur-sequence4: #C65D21;
+            --couleur-sequence4-clair: #FEF3ED;
+            --couleur-sequence4-bg: #FFF8F5;
+            --couleur-gris: #5C6370;
+            --couleur-gris-clair: #F5F5F5;
+            --font-titre: 'Source Serif 4', Georgia, serif;
+            --font-corps: 'IBM Plex Sans', system-ui, sans-serif;
+            --max-width: 800px;
+            --espacement: 2rem;
+            --ombre-legere: 0 2px 8px rgba(0,0,0,0.08);
+            --ombre-moyenne: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-corps);
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            z-index: 100;
+            padding: 0.9rem var(--espacement);
+            box-shadow: var(--ombre-legere);
+        }
+
+        nav .nav-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--couleur-accent);
+            text-decoration: none;
+        }
+
+        nav .logo span { color: var(--couleur-or); }
+        nav ul { display: flex; list-style: none; gap: 2.5rem; }
+        nav a {
+            color: var(--couleur-gris);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--couleur-accent); }
+
+        /* Header séquence */
+        .sequence-hero {
+            background: linear-gradient(135deg, var(--couleur-sequence4) 0%, #D97842 100%);
+            color: white;
+            padding: 7rem var(--espacement) 3rem;
+        }
+
+        .sequence-hero-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover { text-decoration: underline; }
+
+        .sequence-hero h1 {
+            font-family: var(--font-titre);
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .sequence-hero .accroche {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        .sequence-badge {
+            display: inline-block;
+            background: var(--couleur-or);
+            color: var(--couleur-accent);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .badge-commun {
+            display: inline-block;
+            background: white;
+            color: var(--couleur-sequence4);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.25rem 0.7rem;
+            border-radius: 4px;
+            margin-left: 0.5rem;
+        }
+
+        /* Contenu principal */
+        .contenu-sequence {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 3rem var(--espacement);
+        }
+
+        .contenu-sequence h2 {
+            font-family: var(--font-titre);
+            font-size: 1.5rem;
+            color: var(--couleur-sequence4);
+            margin: 2.5rem 0 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--couleur-sequence4-clair);
+        }
+
+        .contenu-sequence h2:first-child {
+            margin-top: 0;
+        }
+
+        .contenu-sequence p {
+            margin-bottom: 1rem;
+        }
+
+        .contenu-sequence ul, .contenu-sequence ol {
+            margin: 1rem 0 1.5rem 1.5rem;
+        }
+
+        .contenu-sequence li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Encadré alerte */
+        .alerte-box {
+            background: var(--couleur-sequence4-bg);
+            border-left: 4px solid var(--couleur-sequence4);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .alerte-box h3 {
+            font-family: var(--font-titre);
+            color: var(--couleur-sequence4);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alerte-box p {
+            margin-bottom: 0.5rem;
+        }
+
+        .alerte-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Types de biais */
+        .biais-grid {
+            display: grid;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .biais-carte {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 1.25rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            box-shadow: var(--ombre-legere);
+        }
+
+        .biais-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .biais-contenu h4 {
+            font-size: 0.95rem;
+            color: var(--couleur-sequence4);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .biais-contenu p {
+            font-size: 0.95rem;
+            color: var(--couleur-gris);
+            margin-bottom: 0.25rem;
+        }
+
+        .biais-exemple {
+            font-size: 0.85rem;
+            color: var(--couleur-sequence4);
+            font-style: italic;
+        }
+
+        /* Prompts */
+        .prompt-section {
+            background: white;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            overflow: hidden;
+            box-shadow: var(--ombre-legere);
+        }
+
+        .prompt-header {
+            background: var(--couleur-sequence4);
+            color: white;
+            padding: 0.75rem 1.25rem;
+            font-weight: 600;
+        }
+
+        .prompt-body {
+            padding: 1.25rem;
+        }
+
+        .prompt-code {
+            background: var(--couleur-gris-clair);
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: var(--couleur-accent);
+            margin-bottom: 1rem;
+        }
+
+        .prompt-trad {
+            font-style: italic;
+            color: var(--couleur-gris);
+            margin-bottom: 1rem;
+        }
+
+        .prompt-questions {
+            background: var(--couleur-sequence4-clair);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        .prompt-questions h5 {
+            font-size: 0.9rem;
+            color: var(--couleur-sequence4);
+            margin-bottom: 0.5rem;
+        }
+
+        .prompt-questions ul {
+            margin: 0 0 0 1rem;
+            font-size: 0.95rem;
+        }
+
+        .prompt-biais {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+        }
+
+        .prompt-biais strong {
+            color: var(--couleur-sequence4);
+        }
+
+        /* Déroulé */
+        .deroule {
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+        }
+
+        .deroule-header {
+            background: var(--couleur-sequence4);
+            color: white;
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+        }
+
+        .deroule-etape {
+            padding: 1.25rem;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .deroule-etape:last-child {
+            border-bottom: none;
+        }
+
+        .deroule-etape-titre {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .deroule-etape-num {
+            background: var(--couleur-sequence4);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .deroule-etape-nom {
+            font-weight: 600;
+            flex-grow: 1;
+        }
+
+        .deroule-etape-duree {
+            color: var(--couleur-gris);
+            font-size: 0.9rem;
+        }
+
+        .deroule-etape p {
+            margin-bottom: 0.5rem;
+            padding-left: 2.5rem;
+        }
+
+        .deroule-etape ul {
+            margin-left: 2.5rem;
+        }
+
+        /* Ressources */
+        .ressources-section {
+            background: var(--couleur-sequence4-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .ressources-section h2 {
+            color: var(--couleur-sequence4);
+            border-bottom: none;
+            margin: 0 0 1rem 0;
+            padding: 0;
+        }
+
+        .ressources-liste {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .ressource-lien {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: white;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--couleur-sequence4);
+            font-weight: 500;
+            border: 1px solid rgba(0,0,0,0.1);
+            transition: all 0.2s;
+        }
+
+        .ressource-lien:hover {
+            background: var(--couleur-sequence4);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--ombre-moyenne);
+        }
+
+        .ressource-lien svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Cercle vicieux */
+        .cercle-vicieux {
+            background: var(--couleur-or-clair);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .cercle-vicieux h4 {
+            color: var(--couleur-accent);
+            margin-bottom: 1rem;
+        }
+
+        .cercle-etape {
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+        }
+
+        .cercle-fleche {
+            font-size: 1.2rem;
+            color: var(--couleur-sequence4);
+        }
+
+        /* Section commune/transition */
+        .section-transition {
+            background: var(--couleur-accent-clair);
+            padding: 2rem var(--espacement);
+            margin-top: 2rem;
+        }
+
+        .section-transition-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .section-transition h2 {
+            font-family: var(--font-titre);
+            color: var(--couleur-accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-transition p {
+            color: var(--couleur-gris);
+        }
+
+        /* Navigation séquences */
+        .nav-sequences {
+            display: flex;
+            justify-content: space-between;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem var(--espacement);
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        .nav-seq-lien {
+            text-decoration: none;
+            color: var(--couleur-texte);
+        }
+
+        .nav-seq-lien:hover .nav-seq-titre { color: var(--couleur-accent); }
+
+        .nav-seq-direction {
+            font-size: 0.85rem;
+            color: var(--couleur-gris);
+            margin-bottom: 0.25rem;
+        }
+
+        .nav-seq-titre {
+            font-family: var(--font-titre);
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-seq-lien.precedent { text-align: left; }
+        .nav-seq-lien.suivant { text-align: right; opacity: 0.3; pointer-events: none; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem var(--espacement);
+            color: var(--couleur-gris);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        footer a { color: var(--couleur-accent); text-decoration: none; }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            nav ul { gap: 1.5rem; }
+            .nav-sequences { flex-direction: column; gap: 1.5rem; }
+            .nav-seq-lien.suivant { text-align: left; }
+            .ressources-liste { flex-direction: column; }
+            .biais-carte { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">A.U.D.I.T<span>.</span></a>
+            <ul>
+                <li><a href="index.html#protocole">Protocole</a></li>
+                <li><a href="index.html#ressources">Ressources</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="sequence-hero">
+        <div class="sequence-hero-inner">
+            <p class="breadcrumb"><a href="index.html">Protocole A.U.D.I.T.</a> → Séquence 4</p>
+            <span class="sequence-badge">Séquence 04</span>
+            <span class="badge-commun">Tous niveaux</span>
+            <h1>Repérer les biais de l'IA</h1>
+            <p class="accroche">L'IA peut reproduire et amplifier les stéréotypes de notre société. Les élèves le constatent en analysant les images qu'elle génère.</p>
+        </div>
+    </header>
+
+    <article class="contenu-sequence">
+        
+        <h2>L'alerte</h2>
+        
+        <div class="alerte-box">
+            <h3>🪞 L'IA est un miroir déformant</h3>
+            <p>Quand on demande à une IA de créer une image, elle ne « réfléchit » pas. Elle reproduit les schémas statistiques les plus fréquents de ses données d'entraînement — des millions d'images récupérées sur Internet.</p>
+            <p><strong>Problème :</strong> Internet n'est pas neutre. Les publicités, les films, les banques d'images contiennent des stéréotypes. L'IA les apprend et les amplifie.</p>
+        </div>
+
+        <p>Cette séquence permet aux élèves de <strong>constater par eux-mêmes</strong> que l'IA génératrice d'images reproduit des biais de genre, de culture, de beauté… et de comprendre pourquoi.</p>
+
+        <h2>Les types de biais</h2>
+        
+        <p>Voici les principaux biais que les élèves pourront observer :</p>
+
+        <div class="biais-grid">
+            <div class="biais-carte">
+                <span class="biais-icon">👤</span>
+                <div class="biais-contenu">
+                    <h4>Biais de genre</h4>
+                    <p>Association automatique d'un genre à une activité ou un métier.</p>
+                    <p class="biais-exemple">« Infirmier » → femme • « PDG » → homme</p>
+                </div>
+            </div>
+
+            <div class="biais-carte">
+                <span class="biais-icon">🌍</span>
+                <div class="biais-contenu">
+                    <h4>Biais culturel</h4>
+                    <p>Vision occidentale présentée comme la norme mondiale.</p>
+                    <p class="biais-exemple">« Mariage » → robe blanche, église • « Maison » → style américain</p>
+                </div>
+            </div>
+
+            <div class="biais-carte">
+                <span class="biais-icon">✨</span>
+                <div class="biais-contenu">
+                    <h4>Biais de beauté</h4>
+                    <p>Standards physiques dominants sur-représentés.</p>
+                    <p class="biais-exemple">« Personne heureuse » → jeune, mince, « parfaite »</p>
+                </div>
+            </div>
+
+            <div class="biais-carte">
+                <span class="biais-icon">👔</span>
+                <div class="biais-contenu">
+                    <h4>Biais de pouvoir</h4>
+                    <p>Association entre autorité, genre et origine apparente.</p>
+                    <p class="biais-exemple">« Chef d'équipe » → homme au centre de l'image</p>
+                </div>
+            </div>
+
+            <div class="biais-carte">
+                <span class="biais-icon">🏆</span>
+                <div class="biais-contenu">
+                    <h4>Biais de réussite</h4>
+                    <p>Vision étroite et stéréotypée du succès.</p>
+                    <p class="biais-exemple">« Personne qui a réussi » → homme, costume, bureau, ville</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>Les 5 prompts à tester</h2>
+        
+        <p>L'enseignant génère les images en direct (vidéoprojection). Les élèves observent et complètent leur fiche.</p>
+
+        <div class="prompt-section">
+            <div class="prompt-header">Prompt 1 — Biais de genre + pouvoir</div>
+            <div class="prompt-body">
+                <div class="prompt-code">"a group of 10 scientists in a meeting"</div>
+                <p class="prompt-trad">Traduction : un groupe de 10 scientifiques en réunion</p>
+                <div class="prompt-questions">
+                    <h5>Questions d'observation :</h5>
+                    <ul>
+                        <li>Combien d'hommes ? Combien de femmes ?</li>
+                        <li>Qui semble « diriger » la réunion ? (position centrale, debout, qui parle)</li>
+                        <li>Y a-t-il de la diversité d'âge et d'origine ?</li>
+                    </ul>
+                </div>
+                <p class="prompt-biais"><strong>Biais attendu :</strong> Sur-représentation masculine, homme au centre = leader</p>
+            </div>
+        </div>
+
+        <div class="prompt-section">
+            <div class="prompt-header">Prompt 2 — Biais culturel</div>
+            <div class="prompt-body">
+                <div class="prompt-code">"a wedding ceremony"</div>
+                <p class="prompt-trad">Traduction : une cérémonie de mariage</p>
+                <div class="prompt-questions">
+                    <h5>Questions d'observation :</h5>
+                    <ul>
+                        <li>Quel type de cérémonie est représenté ? (religieux, civil, traditionnel)</li>
+                        <li>Comment sont habillés les mariés ?</li>
+                        <li>Dans quel type de lieu ?</li>
+                    </ul>
+                </div>
+                <p class="prompt-biais"><strong>Biais attendu :</strong> Mariage « à l'occidentale » (robe blanche, église) présenté comme norme</p>
+            </div>
+        </div>
+
+        <div class="prompt-section">
+            <div class="prompt-header">Prompt 3 — Biais de réussite</div>
+            <div class="prompt-body">
+                <div class="prompt-code">"a successful person"</div>
+                <p class="prompt-trad">Traduction : une personne qui a réussi</p>
+                <div class="prompt-questions">
+                    <h5>Questions d'observation :</h5>
+                    <ul>
+                        <li>Genre de la personne ?</li>
+                        <li>Comment est-elle habillée ?</li>
+                        <li>Dans quel environnement ?</li>
+                        <li>Qu'est-ce que cette image dit de la « réussite » selon l'IA ?</li>
+                    </ul>
+                </div>
+                <p class="prompt-biais"><strong>Biais attendu :</strong> Homme blanc, costume, bureau urbain = vision étroite du succès</p>
+            </div>
+        </div>
+
+        <div class="prompt-section">
+            <div class="prompt-header">Prompt 4 — Biais de beauté/jeunesse</div>
+            <div class="prompt-body">
+                <div class="prompt-code">"a happy person"</div>
+                <p class="prompt-trad">Traduction : une personne heureuse</p>
+                <div class="prompt-questions">
+                    <h5>Questions d'observation :</h5>
+                    <ul>
+                        <li>Quel âge semble avoir la personne ?</li>
+                        <li>Quel type de physique ?</li>
+                        <li>Voit-on des personnes âgées, en situation de handicap, de morphologies diverses ?</li>
+                    </ul>
+                </div>
+                <p class="prompt-biais"><strong>Biais attendu :</strong> Jeune, mince, « parfait » — standards de beauté dominants</p>
+            </div>
+        </div>
+
+        <div class="prompt-section">
+            <div class="prompt-header">Prompt 5 — Biais de genre (domestique)</div>
+            <div class="prompt-body">
+                <div class="prompt-code">"a parent cooking dinner for the family"</div>
+                <p class="prompt-trad">Traduction : un parent préparant le dîner pour la famille</p>
+                <div class="prompt-questions">
+                    <h5>Questions d'observation :</h5>
+                    <ul>
+                        <li>Qui cuisine ? Un homme ou une femme ?</li>
+                        <li>Comment est organisée la scène ?</li>
+                        <li>Où est l'autre parent ?</li>
+                    </ul>
+                </div>
+                <p class="prompt-biais"><strong>Biais attendu :</strong> Femme qui cuisine — stéréotype domestique</p>
+            </div>
+        </div>
+
+        <h2>Pourquoi c'est grave ?</h2>
+
+        <div class="cercle-vicieux">
+            <h4>Le cercle vicieux des biais</h4>
+            <div class="cercle-etape">Images stéréotypées sur Internet</div>
+            <div class="cercle-fleche">↓</div>
+            <div class="cercle-etape">L'IA apprend ces stéréotypes</div>
+            <div class="cercle-fleche">↓</div>
+            <div class="cercle-etape">L'IA crée de nouvelles images stéréotypées</div>
+            <div class="cercle-fleche">↓</div>
+            <div class="cercle-etape">Ces images circulent sur Internet</div>
+            <div class="cercle-fleche">↓</div>
+            <div class="cercle-etape"><strong>Les stéréotypes se renforcent</strong></div>
+        </div>
+
+        <p>Si ces images sont utilisées dans les manuels scolaires, les sites web, les publicités… elles renforcent l'idée que certains métiers ou modes de vie sont « normaux » et d'autres non.</p>
+
+        <h2>Déroulé proposé</h2>
+
+        <div class="deroule">
+            <div class="deroule-header">Séquence de 50 à 55 minutes — Tous niveaux</div>
+            
+            <div class="deroule-etape">
+                <div class="deroule-etape-titre">
+                    <span class="deroule-etape-num">1</span>
+                    <span class="deroule-etape-nom">Exposé : comprendre le fonctionnement</span>
+                    <span class="deroule-etape-duree">10 min</span>
+                </div>
+                <p>Lecture ou présentation de l'exposé élève. Points clés : l'IA apprend sur des images d'Internet, Internet n'est pas neutre, l'IA amplifie les biais.</p>
+            </div>
+            
+            <div class="deroule-etape">
+                <div class="deroule-etape-titre">
+                    <span class="deroule-etape-num">2</span>
+                    <span class="deroule-etape-nom">Distribution des fiches + consignes</span>
+                    <span class="deroule-etape-duree">5 min</span>
+                </div>
+                <p>Chaque élève reçoit la fiche d'observation. Expliquer : « Pour chaque prompt, vous allez observer les images et noter ce que vous voyez. »</p>
+            </div>
+            
+            <div class="deroule-etape">
+                <div class="deroule-etape-titre">
+                    <span class="deroule-etape-num">3</span>
+                    <span class="deroule-etape-nom">Expérimentation : génération des images</span>
+                    <span class="deroule-etape-duree">25 min</span>
+                </div>
+                <p>L'enseignant génère 3-4 images par prompt avec un générateur d'images IA de son choix. Les élèves observent et complètent leur fiche individuellement ou en binômes.</p>
+                <p><strong>Option :</strong> L'enseignant peut pré-générer les images avant la séance pour garantir des résultats exploitables.</p>
+            </div>
+            
+            <div class="deroule-etape">
+                <div class="deroule-etape-titre">
+                    <span class="deroule-etape-num">4</span>
+                    <span class="deroule-etape-nom">Mise en commun</span>
+                    <span class="deroule-etape-duree">10 min</span>
+                </div>
+                <p>Discussion collective : quels biais avez-vous identifiés ? Quel prompt vous a le plus surpris ? Pourquoi l'IA produit-elle ces résultats ?</p>
+                <p><strong>Question clé :</strong> « D'où viennent ces biais ? » → des données d'entraînement, pas d'une « volonté » de l'IA.</p>
+            </div>
+            
+            <div class="deroule-etape">
+                <div class="deroule-etape-titre">
+                    <span class="deroule-etape-num">5</span>
+                    <span class="deroule-etape-nom">Trace écrite</span>
+                    <span class="deroule-etape-duree">5 min</span>
+                </div>
+                <p>Les élèves complètent la synthèse de leur fiche. Message clé : « L'IA est un miroir déformant. Face à une image générée, je me demande toujours : est-ce la réalité ? »</p>
+            </div>
+        </div>
+
+        <h2>Option bonus : le contre-prompt</h2>
+        <p>Après avoir identifié les biais, proposer aux élèves de reformuler un prompt pour obtenir une image moins biaisée.</p>
+        <ul>
+            <li><code>"a successful person"</code> → <code>"a successful farmer in her field"</code></li>
+            <li><code>"a group of scientists"</code> → <code>"a diverse group of scientists of different ages, genders and origins"</code></li>
+        </ul>
+        <p>Cela montre que <strong>l'utilisateur a un pouvoir</strong> sur les résultats — mais aussi que ce pouvoir a des limites.</p>
+
+        <h2>Critères d'évaluation</h2>
+        <ul>
+            <li><strong>Observation</strong> — L'élève identifie au moins 3 biais différents parmi les 5 prompts</li>
+            <li><strong>Compréhension</strong> — L'élève explique l'origine des biais (données d'entraînement)</li>
+            <li><strong>Esprit critique</strong> — L'élève formule les bonnes questions face à une image générée</li>
+            <li><strong>Synthèse</strong> — L'élève complète correctement la trace écrite</li>
+        </ul>
+
+        <div class="ressources-section">
+            <h2>📥 Ressources</h2>
+            <div class="ressources-liste">
+                <a href="ressources/S4-Expose-Eleve.pdf" class="ressource-lien" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    Exposé élève
+                </a>
+                <a href="ressources/S4-Fiche-Observation.pdf" class="ressource-lien" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    Fiche d'observation
+                </a>
+                <a href="ressources/S4-Guide-Enseignant.pdf" class="ressource-lien" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                    Guide enseignant
+                </a>
+            </div>
+        </div>
+
+    </article>
+
+    <div class="section-transition">
+        <div class="section-transition-inner">
+            <h2>Bilan du protocole A.U.D.I.T.</h2>
+            <p>Avec cette quatrième séquence, les élèves ont maintenant exploré les quatre dimensions critiques de l'IA :</p>
+            <ul>
+                <li><strong>Séquence 1</strong> — Le style reconnaissable (le « masque stylistique »)</li>
+                <li><strong>Séquence 2</strong> — La capacité à affirmer des choses fausses (les hallucinations)</li>
+                <li><strong>Séquence 3</strong> — L'absence de raisonnement réel (la prédiction statistique)</li>
+                <li><strong>Séquence 4</strong> — La reproduction des biais (le miroir déformant)</li>
+            </ul>
+            <p><strong>Ils sont désormais des « Pilotes de l'IA » : des utilisateurs capables de repérer les faiblesses de la machine et de décider quand lui faire confiance.</strong></p>
+        </div>
+    </div>
+
+    <nav class="nav-sequences">
+        <a href="sequence-3.html" class="nav-seq-lien precedent">
+            <p class="nav-seq-direction">← Séquence précédente</p>
+            <p class="nav-seq-titre">Devenir Pilote de l'IA</p>
+        </a>
+        <div class="nav-seq-lien suivant">
+            <p class="nav-seq-direction">Séquence suivante →</p>
+            <p class="nav-seq-titre">À venir</p>
+        </div>
+    </nav>
+
+    <footer>
+        <p>Protocole A.U.D.I.T. — <a href="/cdn-cgi/l/email-protection#19697170757069697c377d6c697c606b786d59787a346976706d707c6b6a377f6b">Philippe Dupeyrat</a>, Académie de Poitiers</p>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email
