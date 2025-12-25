@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fondements — L'Enseignant Columbo | A.U.D.I.T.</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.7;
+            color: var(--gray-800);
+            background: var(--gray-50);
+        }
+        
+        /* Navigation */
+        nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+        
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .hero .tagline {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 0.5rem 1.5rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Main content */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .intro-box {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--primary);
+        }
+        
+        .intro-box p {
+            font-size: 1.1rem;
+            color: var(--gray-700);
+        }
+        
+        /* Accordions */
+        .accordion {
+            background: white;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .accordion-header {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gray-800);
+            transition: background 0.2s;
+        }
+        
+        .accordion-header:hover {
+            background: var(--gray-50);
+        }
+        
+        .accordion-header .number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2rem;
+            height: 2rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            margin-right: 1rem;
+        }
+        
+        .accordion-header .arrow {
+            transition: transform 0.3s;
+            color: var(--gray-400);
+        }
+        
+        .accordion.open .accordion-header .arrow {
+            transform: rotate(180deg);
+        }
+        
+        .accordion-content {
+            display: none;
+            padding: 0 1.5rem 1.5rem;
+            color: var(--gray-700);
+        }
+        
+        .accordion.open .accordion-content {
+            display: block;
+        }
+        
+        .accordion-content h3 {
+            font-size: 1rem;
+            color: var(--gray-800);
+            margin: 1.5rem 0 0.75rem;
+        }
+        
+        .accordion-content h3:first-child {
+            margin-top: 0;
+        }
+        
+        .accordion-content p {
+            margin-bottom: 1rem;
+        }
+        
+        .accordion-content ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .accordion-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .accordion-content li strong {
+            color: var(--primary-dark);
+        }
+        
+        /* Quote box */
+        .quote-box {
+            background: var(--gray-100);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: var(--gray-700);
+        }
+        
+        /* Highlight box */
+        .highlight-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+        }
+        
+        .highlight-box h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+        }
+        
+        /* Competence grid */
+        .competence-grid {
+            display: grid;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+        
+        .competence-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--gray-50);
+            border-radius: 0.5rem;
+        }
+        
+        .competence-item .icon {
+            font-size: 1.25rem;
+        }
+        
+        .competence-item strong {
+            color: var(--gray-800);
+        }
+        
+        /* AUDIT Protocol section */
+        .audit-section {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 3rem 0 2rem;
+            text-align: center;
+        }
+        
+        .audit-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .audit-letters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .audit-letter {
+            background: rgba(255,255,255,0.15);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            min-width: 140px;
+            text-align: center;
+        }
+        
+        .audit-letter .letter {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+        
+        .audit-letter .word {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .audit-section .btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary-dark);
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .audit-section .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        /* Download section */
+        .download-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        
+        .download-section h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .download-section p {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        
+        .download-btn:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--gray-600);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--gray-200);
+            margin-top: 3rem;
+        }
+        
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .audit-letters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .audit-letter {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">A.U.D.I.T.</a>
+            <ul>
+                <li><a href="index.html">Protocole</a></li>
+                <li><a href="fondements.html" class="active">Fondements</a></li>
+                <li><a href="index.html#approche">Approche</a></li>
+                <li><a href="mailto:philippe.dupeyrat@ac-poitiers.fr">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>L'Enseignant « Columbo »</h1>
+        <p class="subtitle">Repenser la didactique des mathématiques à l'ère de l'intelligence artificielle</p>
+        <span class="tagline">Fondements théoriques du protocole A.U.D.I.T.</span>
+    </header>
+
+    <main>
+        <div class="intro-box">
+            <p>Dans la série télévisée, le lieutenant Columbo connaît généralement le coupable dès le début. Son travail ne consiste pas à découvrir « qui a fait le coup », mais à <strong>construire la preuve, traquer les incohérences, démontrer</strong>. C'est exactement la posture que nous devons cultiver chez nos élèves face à l'IA.</p>
+        </div>
+
+        <!-- Accordion 1 -->
+        <div class="accordion">
+            <button class="accordion-header">
+                <span><span class="number">1</span>La leçon du passé : quand la technologie déplace les enjeux</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="accordion-content">
+                <h3>L'exemple du tableau de variations</h3>
+                <p>Avant les calculatrices graphiques, le tableau de variations était l'aboutissement d'un long processus d'analyse — l'étape indispensable pour tracer manuellement la courbe d'une fonction. Le tracé constituait une épreuve du baccalauréat.</p>
+                
+                <p>L'arrivée de la technologie a <strong>inversé cette logique</strong>. La courbe est devenue un « donné » immédiat. Le tracé a disparu des examens. Pourtant, le tableau de variations n'a pas disparu ; son rôle a muté : il sert désormais à <em>récapituler et donner du sens</em> à un objet déjà visible.</p>
+                
+                <div class="quote-box">
+                    L'outil technologique ne remplace pas la réflexion, il déplace l'endroit où elle s'exerce.
+                </div>
+                
+                <h3>Ce que l'IA change fondamentalement</h3>
+                <p>L'IA générative pousse cette logique à son paroxysme. Elle ne fournit pas seulement des graphiques : elle propose des <strong>raisonnements complets</strong>, des démonstrations structurées, des solutions argumentées.</p>
+                
+                <p>Dans le cadre de la Théorie des Situations Didactiques de Brousseau, le « milieu » — le système antagoniste auquel l'élève est confronté — s'enrichit d'un nouvel élément : <strong>la réponse générée par la machine</strong>, qu'il faut analyser, valider ou réfuter.</p>
+            </div>
+        </div>
+
+        <!-- Accordion 2 -->
+        <div class="accordion">
+            <button class="accordion-header">
+                <span><span class="number">2</span>Du mode « Sherlock » au mode « Columbo »</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="accordion-content">
+                <h3>Le modèle traditionnel : l'élève-enquêteur</h3>
+                <p>Historiquement, l'élève était dans une posture de « Sherlock Holmes ». Il partait d'une énigme — l'énoncé — pour chercher seul la solution. L'enseignant était le « révélateur d'énigme » et la source unique des explications.</p>
+                
+                <h3>Le nouveau modèle : l'élève-validateur</h3>
+                <p>L'IA change la donne en fournissant un accès immédiat aux solutions. Face à une réponse déjà générée, l'élève doit adopter la posture du <strong>lieutenant Columbo</strong> : construire la preuve, traquer les incohérences, démontrer.</p>
+                
+                <div class="quote-box">
+                    L'enjeu pédagogique se déplace de la production brute vers l'analyse et la validation critique des solutions proposées par la machine.
+                </div>
+                
+                <h3>Les compétences du « mode Columbo »</h3>
+                <div class="competence-grid">
+                    <div class="competence-item">
+                        <span class="icon">🔍</span>
+                        <div><strong>Analyse critique</strong> — Examiner une solution, identifier forces et faiblesses, repérer les « hallucinations ».</div>
+                    </div>
+                    <div class="competence-item">
+                        <span class="icon">🔄</span>
+                        <div><strong>Régulation</strong> — Ajuster sa démarche, reformuler ses questions, préciser ses attentes.</div>
+                    </div>
+                    <div class="competence-item">
+                        <span class="icon">✓</span>
+                        <div><strong>Validation</strong> — Vérifier la cohérence mathématique, confronter à d'autres sources.</div>
+                    </div>
+                    <div class="competence-item">
+                        <span class="icon">⚖️</span>
+                        <div><strong>Évaluation</strong> — Juger de la pertinence, apprécier la diversité des approches.</div>
+                    </div>
+                    <div class="competence-item">
+                        <span class="icon">🧠</span>
+                        <div><strong>Métacognition</strong> — Réfléchir sur son propre processus d'apprentissage.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accordion 3 -->
+        <div class="accordion">
+            <button class="accordion-header">
+                <span><span class="number">3</span>La métamorphose du rôle de l'enseignant</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="accordion-content">
+                <h3>De transmetteur à orchestrateur</h3>
+                <p>L'enseignant ne disparaît pas — bien au contraire. Il devient un « metteur en scène d'environnements d'apprentissage ». L'apprentissage ne se termine plus là où l'IA donne une réponse. <strong>Il commence précisément à cet endroit.</strong></p>
+                
+                <h3>Les trois nouveaux axes du métier</h3>
+                <div class="highlight-box">
+                    <h4>1. Curateur et validateur</h4>
+                    <p style="margin:0">L'IA génère facilement des supports. L'enseignant sélectionne et garantit leur rigueur. Cette tâche exige une expertise disciplinaire renforcée.</p>
+                </div>
+                <div class="highlight-box">
+                    <h4>2. Guide de la compréhension</h4>
+                    <p style="margin:0">L'enseignant aide l'élève à donner du sens, à contextualiser. Il apporte ce qu'aucune machine ne peut offrir : l'intuition mathématique, le lien avec l'expérience vécue.</p>
+                </div>
+                <div class="highlight-box">
+                    <h4>3. Garant de l'esprit critique</h4>
+                    <p style="margin:0">Former l'élève à débusquer les « hallucinations ». L'erreur de la machine devient un matériau didactique de premier ordre.</p>
+                </div>
+                
+                <h3>Ce qui reste irréductiblement humain</h3>
+                <ul>
+                    <li><strong>La présence</strong> — observer un froncement de sourcil, sentir une classe</li>
+                    <li><strong>La relation</strong> — le climat de confiance, le sourire qui rassure</li>
+                    <li><strong>L'intelligence du moment</strong> — le changement de stratégie en une seconde</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Accordion 4 -->
+        <div class="accordion">
+            <button class="accordion-header">
+                <span><span class="number">4</span>L'élève en dialogue critique avec la machine</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="accordion-content">
+                <h3>L'IA comme « milieu » au sens de Brousseau</h3>
+                <p>Loin de rendre l'élève passif, l'IA crée de nouveaux « milieux » didactiques. L'IA propose des réponses que l'élève doit évaluer. Elle peut se tromper, ce qui crée des opportunités d'apprentissage. Elle peut être interrogée de manière itérative.</p>
+                
+                <h3>La conversation constructive</h3>
+                <div class="competence-grid">
+                    <div class="competence-item">
+                        <span class="icon">💬</span>
+                        <div><strong>Questionnement progressif</strong> — Affiner sa demande, préciser les contraintes.</div>
+                    </div>
+                    <div class="competence-item">
+                        <span class="icon">⚔️</span>
+                        <div><strong>Confrontation</strong> — Proposer un contre-exemple, demander une justification.</div>
+                    </div>
+                    <div class="competence-item">
+                        <span class="icon">🔗</span>
+                        <div><strong>Vérification croisée</strong> — Comparer avec d'autres sources, avec ses pairs.</div>
+                    </div>
+                    <div class="competence-item">
+                        <span class="icon">🪞</span>
+                        <div><strong>Métaréflexion</strong> — Analyser pourquoi l'IA a répondu ainsi, quels biais l'affectent.</div>
+                    </div>
+                </div>
+                
+                <h3>Du reproducteur au juge</h3>
+                <p>La taxonomie de Bloom prend tout son sens : les niveaux inférieurs (mémoriser, appliquer) peuvent être délégués à l'IA, tandis que les niveaux supérieurs (<strong>analyser, évaluer, créer</strong>) deviennent le cœur de l'activité intellectuelle de l'élève.</p>
+            </div>
+        </div>
+
+        <!-- Accordion 5 -->
+        <div class="accordion">
+            <button class="accordion-header">
+                <span><span class="number">5</span>Les écueils à éviter</span>
+                <span class="arrow">▼</span>
+            </button>
+            <div class="accordion-content">
+                <div class="highlight-box" style="border-color: #fbbf24; background: #fffbeb;">
+                    <h4 style="color: #b45309;">⚠️ Le risque de passivité</h4>
+                    <p style="margin:0">Une utilisation non encadrée peut réduire la motivation à développer une pensée indépendante. L'IA doit toujours être accompagnée d'une exigence d'analyse critique.</p>
+                </div>
+                <div class="highlight-box" style="border-color: #fbbf24; background: #fffbeb;">
+                    <h4 style="color: #b45309;">⚠️ La confiance aveugle</h4>
+                    <p style="margin:0">Les IA « hallucinent » parfois, inventant des théorèmes inexistants. Former à la méfiance constructive est essentiel.</p>
+                </div>
+                <div class="highlight-box" style="border-color: #fbbf24; background: #fffbeb;">
+                    <h4 style="color: #b45309;">⚠️ L'abandon des fondamentaux</h4>
+                    <p style="margin:0">Un élève qui ne maîtrise pas les bases sera incapable d'évaluer une réponse. Le socle de connaissances reste indispensable — c'est lui qui permet l'esprit critique.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- AUDIT Section -->
+        <div class="audit-section">
+            <h2>Le protocole A.U.D.I.T. en action</h2>
+            <div class="audit-letters">
+                <div class="audit-letter">
+                    <span class="letter">A</span>
+                    <span class="word">Analyser</span>
+                </div>
+                <div class="audit-letter">
+                    <span class="letter">U</span>
+                    <span class="word">Utiliser</span>
+                </div>
+                <div class="audit-letter">
+                    <span class="letter">D</span>
+                    <span class="word">Douter</span>
+                </div>
+                <div class="audit-letter">
+                    <span class="letter">I</span>
+                    <span class="word">Interroger</span>
+                </div>
+                <div class="audit-letter">
+                    <span class="letter">T</span>
+                    <span class="word">Tester</span>
+                </div>
+            </div>
+            <a href="index.html" class="btn">Découvrir les séquences pédagogiques →</a>
+        </div>
+
+        <!-- Download -->
+        <div class="download-section">
+            <h3>📄 Article complet</h3>
+            <p>Téléchargez l'article de fond avec références bibliographiques</p>
+            <a href="assets/article-enseignant-columbo.pdf" class="download-btn">
+                <span>⬇</span> Télécharger le PDF
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Protocole A.U.D.I.T. — Conçu par <a href="mailto:philippe.dupeyrat@ac-poitiers.fr">Philippe Dupeyrat</a>, IA-IPR de mathématiques</p>
+    </footer>
+
+    <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const accordion = header.parentElement;
+                accordion.classList.toggle('open');
+            });
+        });
+        
+        // Open first accordion by default
+        document.querySelector('.accordion').classList.add('open');
+    </script>
+</body>
+</html>
