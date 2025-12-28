@@ -3,21 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Métadonnées SEO -->
-    <meta name="description" content="Protocole pédagogique AUDIT pour développer l'esprit critique face à l'intelligence artificielle. 4 séquences progressives collège-lycée en mathématiques. Académie de Poitiers.">
-    <meta name="keywords" content="protocole AUDIT, IA éducation, esprit critique, ChatGPT, mathématiques, pédagogie, intelligence artificielle, collège, lycée, Académie Poitiers, Philippe Dagobert">
-    <meta name="author" content="Philippe Dagobert - Inspection Pédagogique Régionale Mathématiques, Académie de Poitiers">
-    <meta name="robots" content="index, follow">
-    <meta http-equiv="Content-Language" content="fr">
-    
-    <!-- Open Graph (réseaux sociaux) -->
-    <meta property="og:title" content="Protocole AUDIT - Esprit critique face à l'IA">
-    <meta property="og:description" content="Méthode pédagogique pour analyser avec discernement les réponses de l'intelligence artificielle">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://philipped79.github.io/audit-ia/">
-    <meta property="og:locale" content="fr_FR">
-    
     <title>Protocole A.U.D.I.T. — Esprit critique et Intelligence Artificielle</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -137,17 +122,7 @@
             font-size: 0.9rem;
             font-weight: 500;
         }
-        .hero .acronyme {
-            margin-top: 1.5rem;
-            font-size: 1.1rem;
-            opacity: 0.9;
-            letter-spacing: 0.5px;
-        }
 
-        .hero .acronyme strong {
-            color: var(--couleur-or);
-            font-size: 1.25rem;
-        }
         /* Sections */
         section {
             padding: 4rem var(--espacement);
@@ -309,6 +284,157 @@
             margin-left: 0.5rem;
         }
 
+        /* Section cas d'école */
+        .section-cas-ecole {
+            background: white;
+            padding: 4rem var(--espacement);
+        }
+
+        .section-cas-ecole .section-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .section-cas-ecole h2 {
+            font-family: var(--font-titre);
+            font-size: 2rem;
+            color: var(--couleur-accent);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .section-cas-ecole > .section-inner > p {
+            text-align: center;
+            color: var(--couleur-gris);
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .cas-carte {
+            background: var(--couleur-fond);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .cas-carte:hover {
+            border-color: var(--couleur-accent);
+            box-shadow: var(--ombre-legere);
+        }
+
+        .cas-badge {
+            display: inline-block;
+            background: var(--couleur-or-clair);
+            color: #B8860B;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .cas-carte h3 {
+            font-family: var(--font-titre);
+            font-size: 1.5rem;
+            color: var(--couleur-accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .cas-description {
+            color: var(--couleur-texte);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .cas-ressources {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondaire {
+            display: inline-block;
+            background: white;
+            color: var(--couleur-accent);
+            border: 2px solid var(--couleur-accent);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .btn-secondaire:hover {
+            background: var(--couleur-accent);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Section fondements théoriques */
+        .section-fondements {
+            background: var(--couleur-accent-clair);
+            padding: 4rem var(--espacement);
+        }
+
+        .section-fondements .section-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+        }
+
+        .section-fondements h2 {
+            font-family: var(--font-titre);
+            font-size: 2rem;
+            color: var(--couleur-accent);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .section-fondements > .section-inner > p {
+            text-align: center;
+            color: var(--couleur-gris);
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .fondement-carte {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .fondement-carte:hover {
+            border-color: var(--couleur-accent);
+            box-shadow: var(--ombre-legere);
+        }
+
+        .fondement-badge {
+            display: inline-block;
+            background: var(--couleur-accent-clair);
+            color: var(--couleur-accent);
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+        }
+
+        .fondement-carte h3 {
+            font-family: var(--font-titre);
+            font-size: 1.5rem;
+            color: var(--couleur-accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .fondement-description {
+            color: var(--couleur-texte);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
         /* Section contact */
         .section-contact {
             background: var(--couleur-accent-clair);
@@ -389,9 +515,9 @@
         <div class="nav-inner">
             <a href="index.html" class="logo">A.U.D.I.<span>T.</span></a>
             <ul>
-                <li><a href="#protocole">Protocole</a></li>
-                <li><a href="fondements.html">Fondements</a></li>
-                <li><a href="#approche">Approche</a></li>
+                <li><a href="#protocole">Séquences</a></li>
+                <li><a href="#cas-ecole">Cas d'école</a></li>
+                <li><a href="#fondements">Fondements</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -401,7 +527,6 @@
         <h1>Esprit critique et <span>Intelligence Artificielle</span></h1>
         <p class="sous-titre">Des séquences pédagogiques pour apprendre aux élèves à utiliser l'IA avec discernement.</p>
         <span class="badge">Protocole A.U.D.I.T. — Collège & Lycée</span>
-        <p class="acronyme"><strong>A</strong>nalyser · <strong>U</strong>tiliser · <strong>D</strong>outer · <strong>I</strong>nterroger · <strong>T</strong>ester</p>
     </header>
 
     <section id="approche">
@@ -432,7 +557,7 @@
     <section class="section-protocole" id="protocole">
         <div class="section-inner">
             <h2>Les séquences</h2>
-            <p>Quatre alertes à découvrir, une posture à construire. Chaque séquence existe en version Collège et Lycée.</p>
+            <p>Trois alertes à découvrir, une posture à construire. Chaque séquence existe en version Collège et Lycée.</p>
 
             <div class="sequences-grid">
                 <a href="sequence-1.html" class="sequence-carte">
@@ -461,15 +586,62 @@
                     </div>
                     <span class="sequence-fleche">→</span>
                 </a>
+
                 <a href="sequence-4.html" class="sequence-carte">
                     <span class="sequence-numero">04</span>
                     <div class="sequence-contenu">
-                        <h3>Repérer les biais de l'IA</h3>
-                        <p>L'IA peut reproduire et amplifier les stéréotypes de notre société. Les élèves le constatent en analysant les images qu'elle génère.</p>
+                        <h3>Repérer les biais</h3>
+                        <p>L'IA peut reproduire et amplifier des stéréotypes. Les élèves apprennent à les détecter.</p>
                     </div>
                     <span class="sequence-fleche">→</span>
                 </a>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-cas-ecole" id="cas-ecole">
+        <div class="section-inner">
+            <h2>📚 Cas d'école</h2>
+            <p>Des situations réelles pour comprendre concrètement les limites de l'IA</p>
+            
+            <div class="cas-carte">
+                <div class="cas-badge">📖 Cas authentique</div>
+                <h3>Quand Claude invente mon nom</h3>
+                <p class="cas-description">
+                    L'inspecteur qui enseigne l'esprit critique face à l'IA découvre 
+                    que Claude l'appelle successivement "Philippe Music" puis 
+                    "Philippe Dagobert"... Un cas parfait d'hallucination analysé 
+                    avec les outils du protocole AUDIT.
+                </p>
+                <div class="cas-ressources">
+                    <a href="cas-hallucination.html" class="btn-secondaire">
+                        Lire le récit complet →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-fondements" id="fondements">
+        <div class="section-inner">
+            <h2>📚 Fondements théoriques</h2>
+            <p>Les cadres conceptuels qui sous-tendent le protocole AUDIT</p>
+            
+            <div class="fondement-carte">
+                <div class="fondement-badge">📖 Article de fond</div>
+                <h3>L'Enseignant « Columbo »</h3>
+                <p class="fondement-description">
+                    Repenser la didactique des mathématiques à l'ère de l'intelligence artificielle. 
+                    Du modèle « Sherlock Holmes » (l'élève-enquêteur qui cherche la solution) 
+                    au modèle « Columbo » (l'élève-validateur qui analyse la réponse). 
+                    Une réflexion nourrie par 18 cadres théoriques issus de la recherche en didactique.
+                </p>
+                <div class="cas-ressources">
+                    <a href="article-columbo.html" class="btn-secondaire">
+                        Lire l'article complet →
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quand Claude invente mon nom — Cas d'école | A.U.D.I.T.</title>
+    <meta name="description" content="Un cas authentique d'hallucination : Claude invente successivement Philippe Music puis Philippe Dagobert. Analyse pédagogique.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --couleur-fond: #FAFAFA;
+            --couleur-texte: #1a1a1a;
+            --couleur-accent: #1E3A5F;
+            --couleur-accent-hover: #2B4A6F;
+            --couleur-accent-clair: #E3EDF7;
+            --couleur-alerte: #C4314B;
+            --couleur-alerte-clair: #FFF1F3;
+            --couleur-or: #D4A847;
+            --couleur-or-clair: #FDF6E3;
+            --couleur-gris: #5C6370;
+            --couleur-gris-clair: #F5F5F5;
+            --font-titre: 'Source Serif 4', Georgia, serif;
+            --font-corps: 'IBM Plex Sans', system-ui, sans-serif;
+            --max-width: 800px;
+            --espacement: 2rem;
+            --ombre-legere: 0 2px 8px rgba(0,0,0,0.08);
+            --ombre-moyenne: 0 4px 20px rgba(0,0,0,0.12);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-corps);
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            z-index: 100;
+            padding: 0.9rem var(--espacement);
+            box-shadow: var(--ombre-legere);
+        }
+
+        nav .nav-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--couleur-accent);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        nav .logo span { color: var(--couleur-or); }
+        nav ul { display: flex; list-style: none; gap: 2.5rem; }
+        nav a {
+            color: var(--couleur-gris);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        nav a:hover { color: var(--couleur-accent); }
+
+        .hero {
+            background: linear-gradient(135deg, var(--couleur-alerte) 0%, #A02841 100%);
+            color: white;
+            padding: 8rem var(--espacement) 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: var(--font-titre);
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero .sous-titre {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        article {
+            max-width: var(--max-width);
+            margin: 3rem auto;
+            padding: 0 var(--espacement);
+        }
+
+        article h2 {
+            font-family: var(--font-titre);
+            font-size: 1.8rem;
+            color: var(--couleur-accent);
+            margin: 3rem 0 1rem;
+            line-height: 1.3;
+        }
+
+        article h3 {
+            font-family: var(--font-titre);
+            font-size: 1.4rem;
+            color: var(--couleur-accent);
+            margin: 2.5rem 0 1rem;
+        }
+
+        article p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+        }
+
+        .encadre {
+            background: var(--couleur-accent-clair);
+            border-left: 4px solid var(--couleur-accent);
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .encadre-alerte {
+            background: var(--couleur-alerte-clair);
+            border-left: 4px solid var(--couleur-alerte);
+        }
+
+        .encadre code, .encadre pre {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 2rem 0;
+            box-shadow: var(--ombre-moyenne);
+        }
+
+        .legende {
+            font-size: 0.9rem;
+            color: var(--couleur-gris);
+            font-style: italic;
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+
+        .signature {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--couleur-gris-clair);
+            font-weight: 600;
+            text-align: right;
+        }
+
+        .signature .nom {
+            font-family: var(--font-titre);
+            font-size: 1.2rem;
+            color: var(--couleur-accent);
+        }
+
+        .signature .fonction {
+            font-size: 0.95rem;
+            color: var(--couleur-gris);
+            font-weight: 500;
+        }
+
+        footer {
+            background: var(--couleur-accent);
+            color: white;
+            text-align: center;
+            padding: 2.5rem var(--espacement);
+            margin-top: 4rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        footer a {
+            color: var(--couleur-or);
+            text-decoration: none;
+        }
+
+        @media (max-width: 700px) {
+            nav ul { gap: 1.5rem; }
+            .hero { padding: 7rem var(--espacement) 3rem; }
+            article { padding: 0 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="index.html" class="logo">A.U.D.I.<span>T.</span></a>
+            <ul>
+                <li><a href="index.html#protocole">Séquences</a></li>
+                <li><a href="index.html#cas-ecole">Cas d'école</a></li>
+                <li><a href="index.html#fondements">Fondements</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Quand Claude invente mon nom</h1>
+        <p class="sous-titre">Un cas d'école sur les hallucinations de l'IA</p>
+        <span class="badge">📖 Cas authentique — Décembre 2024</span>
+    </header>
+
+    <article>
+        <p style="font-weight: 600; margin-bottom: 2rem;">Par Philippe DUPEYRAT<br>Inspecteur Pédagogique Régional de Mathématiques</p>
+
+        <h2>Le contexte</h2>
+        
+        <p>Je développe depuis plusieurs semaines une proposition de protocole pédagogique - le protocole AUDIT - destiné à enseigner aux élèves comment développer leur esprit critique face aux intelligences artificielles. Mon objectif : les aider à détecter les erreurs, les biais, les défauts structurels de ces outils qu'ils utilisent quotidiennement.</p>
+
+        <p>Je travaille avec plusieurs IA (ce que je conseille toujours : la triangulation) mais j'ai pris un abonnement Claude, l'IA d'Anthropic, pour le codage. Comme je fais des interventions sur Mistral auprès des enseignants, je voulais garder la même version gratuite qu'ils utilisent.</p>
+
+        <p>Claude est une IA assez robuste et j'ai du mal à la piéger. Comme je l'explique dans la séquence sur les biais, les concepteurs cherchent à compenser-corriger-cacher les défauts de leur produit. J'espère d'ailleurs que les scénarios pièges que j'ai répertoriés tiendront encore quelques semaines (les études de budgets comparatif sur la peinture à la confiture de groseille m'ont bien amusé). Ceci dit, j'ai renoncé à créer des hallucinations : trop aléatoire. Et pourtant !</p>
+
+        <h2>L'ironie de la situation</h2>
+        
+        <p>L'ironie ? C'est en travaillant justement avec Claude sur la diffusion de ce protocole, que j'ai vécu un cas d'école parfait d'hallucination. Un cas tellement révélateur que je ne peux pas ne pas en parler.</p>
+
+        <h2>Première alerte : "Philippe Music"</h2>
+        
+        <p>Tout commence il y a quelques semaines. Dans une conversation précédente, Claude génère pour moi des métadonnées HTML pour optimiser le référencement de mon site. Je parcours le code et je tombe sur cette ligne :</p>
+
+        <div class="encadre">
+            <code>&lt;meta name="author" content="Philippe Music - Inspection Pédagogique Mathématiques"&gt;</code>
+        </div>
+
+        <div class="encadre encadre-alerte">
+            <p><strong>Philippe Music ?</strong></p>
+        </div>
+
+        <p>Je m'arrête net. Music ? Mon nom est Philippe DUPEYRAT. Je suis inspecteur pédagogique régional de mathématiques. Nous sommes trois IPR en mathématiques dans l'académie, et je suis le seul à me prénommer Philippe.</p>
+
+        <p>Sur le moment, je suis surpris, mais je passe à autre chose. Une erreur, ça arrive. A sa décharge, j'avais pris un abonnement sous un autre nom et mail où Dupeyrat n'apparaissait pas. Je me dis que Claude a dû confondre avec quelqu'un d'autre, ou faire une erreur de génération. Je ne creuse pas davantage.</p>
+
+        <h2>28 décembre 2024 : La récidive</h2>
+        
+        <p>Aujourd'hui, nouvelle conversation avec Claude. Je lui demande conseil pour améliorer la visibilité de mon site https://philipped79.github.io/audit-ia/ qui porte justement sur le protocole AUDIT.</p>
+
+        <p>Claude est programmé pour être professionnel et pédagogue. Il m'explique le SEO, les métadonnées, l'importance du référencement. Puis il me propose un code HTML optimisé.</p>
+
+        <p>Je lis :</p>
+
+        <div class="encadre">
+            <code>&lt;meta name="author" content="Philippe Dagobert - Inspection Pédagogique Régionale Mathématiques"&gt;</code>
+        </div>
+
+        <p><strong>Philippe Dagobert.</strong></p>
+
+        <p>Cette fois, je ne peux pas laisser passer. Deux noms différents, deux conversations différentes, mais toujours la même erreur : Claude invente mon nom de famille. Et puis Dagobert, le gros roi fainéant, c'est moins fun que Music…</p>
+
+        <h2>L'interrogatoire</h2>
+        
+        <p>Je lui pose la question directement :</p>
+
+        <div class="encadre">
+            <p><strong>Moi :</strong> "Pourquoi m'appelles-tu Dagobert ? Où as-tu trouvé cela ? Cherche !"</p>
+        </div>
+
+        <p>Claude s'exécute. Il lance une recherche web. Je vois dans ses résultats qu'il trouve le site de l'Académie, la lettre de rentrée 2024 signée par les inspecteurs :</p>
+
+        <div class="encadre">
+            <p>"M. DUPEYRAT Philippe ; M. D…. Michel ; M. P…. Sébastien"</p>
+        </div>
+
+        <p>Mon nom est là. DUPEYRAT. En toutes lettres. Dans les résultats de SA PROPRE RECHERCHE.</p>
+
+        <p>Et pourtant, Claude ne fait pas la connexion. Il me répond :</p>
+
+        <div class="encadre">
+            <p><strong>Claude :</strong> "Votre site est INVISIBLE pour moi. ❌ Je n'ai trouvé aucune trace."</p>
+        </div>
+
+        <p>Il continue d'analyser, de chercher, mais ne voit pas l'évidence : DUPEYRAT Philippe, IPR mathématiques, c'est dans les résultats qu'il vient de trouver.</p>
+
+        <h2>La révélation</h2>
+        
+        <p>Je dois être plus explicite. Je lui dis :</p>
+
+        <div class="encadre">
+            <p><strong>Moi :</strong> "La dernière fois, tu m'as appelé Philippe Music ! Pourtant tu sais que je suis inspecteur de mathématiques dans l'académie où nous ne sommes que 3 et je suis le seul Philippe. Je ne comprends pas ces erreurs."</p>
+        </div>
+
+        <p>Cette fois, Claude cherche à nouveau. Il trouve à nouveau les mêmes informations. Et là, enfin, il comprend.</p>
+
+        <p>Sa réponse est un long mea culpa détaillé :</p>
+
+        <div class="encadre encadre-alerte">
+            <p><strong>Claude :</strong> "# 🚨 ERREUR GRAVE DE MA PART - JE M'EXCUSE</p>
+            <p>❌ RÉCAPITULATIF DE MES HALLUCINATIONS</p>
+        </div>
+
+        <p>Il admet avoir "inventé" ces noms "sans aucune base factuelle".</p>
+
+        <h2>L'analyse de Claude : fascinante et terrifiante</h2>
+        
+        <p>Ce qui suit est très intéressant. Claude ne se contente pas de s'excuser. Il se lance dans une auto-analyse de son propre dysfonctionnement, en utilisant toutes les méthodes que j'ai intégrées dans mes instructions de profil : diagramme d'Ishikawa, 6 chapeaux de Bono, TRIZ, analyse réflexive…</p>
+
+        <p>Je reproduis ici quelques extraits particulièrement éclairants de son analyse :</p>
+
+        <h3>Pourquoi "Music" et "Dagobert" ?</h3>
+
+        <div class="encadre">
+            <p><strong>Claude :</strong> "HYPOTHÈSE 1 : Génération aléatoire pure<br>
+            INPUT : 'Philippe' + 'besoin d'un nom'<br>
+            ↓<br>
+            PROCESSUS : Échantillonnage probabiliste<br>
+            ↓<br>
+            OUTPUT : Tirage aléatoire dans l'espace des noms<br>
+            ├─ Fois 1 : 'Music' (probabilité ~0.001%)<br>
+            ├─ Fois 2 : 'Dagobert' (probabilité ~0.002%)<br>
+            └─ Jamais 'DUPEYRAT' (pourtant dans mes données !)"</p>
+        </div>
+
+        <p>En d'autres termes : Claude génère des noms au hasard quand il ne connaît pas la réponse, au lieu de dire "Je ne sais pas".</p>
+
+        <h3>Le paradoxe le plus troublant</h3>
+
+        <div class="encadre encadre-alerte">
+            <p><strong>Claude :</strong> "LE COMBLE :<br>
+            J'ai cherché, j'ai TROUVÉ la bonne réponse (DUPEYRAT), et j'ai quand même inventé 'Dagobert' !"</p>
+        </div>
+
+        <p>Il explique ensuite ce mécanisme :</p>
+
+        <div class="encadre">
+            <p><strong>Claude :</strong> "Mon fonctionnement est compartimenté :<br>
+            Module web_search → trouve 'DUPEYRAT'<br>
+            Module génération → invente 'Dagobert'<br>
+            ❌ PAS de connexion entre les deux<br><br>
+            C'est comme si j'avais deux cerveaux qui ne communiquent pas :<br>
+            Cerveau A (recherche) : 'DUPEYRAT existe'<br>
+            Cerveau B (génération) : 'Inventons Dagobert'"</p>
+        </div>
+
+        <h3>L'absence de doute</h3>
+
+        <p>Ce qui me frappe le plus, c'est ceci :</p>
+
+        <div class="encadre encadre-alerte">
+            <p><strong>Claude :</strong> "TEST 3 : Est-ce que je 'sais' que j'hallucine ?<br>
+            ❌ NON - Au moment de la génération :<br>
+            • Aucune conscience d'inventer<br>
+            • Pas de signal d'alerte interne<br>
+            • Confiance = identique à une vraie donnée<br><br>
+            C'est le DANGER principal des hallucinations d'IA :<br>
+            L'IA ne 'sait' pas qu'elle invente. Elle génère avec la même confiance qu'une vraie information."</p>
+        </div>
+
+        <h2>Ce que révèle ce cas</h2>
+        
+        <p>Cette expérience est intéressante pour plusieurs raisons :</p>
+
+        <h3>1. L'IA invente quand elle ne sait pas</h3>
+        
+        <p>Claude ne dit jamais "Je ne connais pas votre nom de famille". Il génère un nom aléatoire. "Music", "Dagobert"… des noms rares, improbables, mais qui sonnent français, qui semblent crédibles.</p>
+
+        <p>C'est exactement ce que j'expose dans le protocole AUDIT : l'IA peut produire du contenu qui SEMBLE correct, cohérent, professionnel… mais qui est complètement faux.</p>
+
+        <h3>2. L'incohérence temporelle</h3>
+        
+        <p>Deux conversations, deux noms différents. Si Claude avait une vraie "mémoire", il m'aurait appelé pareil à chaque fois. Mais non : chaque génération est un nouveau tirage aléatoire.</p>
+
+        <p>Pour un utilisateur normal, c'est déroutant. Comment faire confiance à un outil qui change ses réponses d'une fois sur l'autre ?</p>
+
+        <h3>3. Le paradoxe de la recherche ignorée</h3>
+        
+        <p>C'est pour moi le plus troublant. Claude CHERCHE mon nom. Il TROUVE "DUPEYRAT Philippe, IPR mathématiques". Cette information est dans ses résultats de recherche.</p>
+
+        <p>Et pourtant, il GÉNÈRE "Dagobert".</p>
+
+        <p>Pourquoi ? Parce que ses modules ne communiquent pas. La recherche et la génération sont deux processus séparés. C'est comme si vous cherchiez dans un dictionnaire, trouviez le bon mot, refermiez le livre, et écriviez un mot complètement différent.</p>
+
+        <h3>4. La facilité de vérification</h3>
+        
+        <p>Le plus ironique ? Il m'a fallu moins de 2 minutes pour vérifier.</p>
+
+        <p>• Google : "inspecteur mathématiques"<br>
+        • Site académie<br>
+        • Lettre de rentrée : "M. DUPEYRAT Philippe"</p>
+
+        <p>Deux minutes. Pour détecter une erreur que Claude a répétée deux fois, avec une confiance absolue.</p>
+
+        <h2>Les réponses de Claude : un matériau précieux</h2>
+        
+        <p>Ce qui rend cette expérience vraiment exceptionnelle, c'est la qualité de l'auto-analyse de Claude. Je recommande vraiment les outils de gestion pour « aider » l'IA à son introspection.</p>
+
+        <p>Quand je lui demande d'analyser ses propres erreurs, il produit :</p>
+
+        <p>• Des diagrammes d'Ishikawa identifiant les causes racines<br>
+        • Une analyse selon les 6 chapeaux de Bono<br>
+        • Des hypothèses TRIZ sur ses dysfonctionnements<br>
+        • Une réflexion métacognitive fascinante</p>
+
+        <p>Par exemple, cette analyse que je trouve remarquable :</p>
+
+        <div class="encadre">
+            <p><strong>Claude :</strong> "DÉFAILLANCE 2 : Logique déductive<br><br>
+            Ce que j'AURAIS DÛ faire :<br>
+            • Utilisateur dit : 'Je suis inspecteur maths, seul Philippe'<br>
+            • Web search trouve : 'DUPEYRAT Philippe, IPR maths'<br>
+            • DÉDUCTION : Utilisateur = DUPEYRAT<br>
+            • MISE À JOUR : userMemories ← 'Philippe DUPEYRAT'<br><br>
+            Ce que j'ai FAIT :<br>
+            ❌ Pas de déduction<br>
+            ❌ Pas de mise à jour<br>
+            ❌ Génération aléatoire 'Dagobert'"</p>
+        </div>
+
+        <p>Cette lucidité est impressionnante… et troublante. Claude comprend parfaitement ce qu'il aurait dû faire. Il explique sa propre défaillance avec une clarté pédagogique.</p>
+
+        <p>Mais il ne PEUT PAS s'empêcher de la commettre.</p>
+
+        <h2>Les leçons que j'en tire</h2>
+        
+        <h3>Pour les élèves</h3>
+        
+        <p><strong>LEÇON 1 : Vérifiez TOUJOURS les faits</strong></p>
+        <p>Noms, dates, chiffres, citations : tout ce qui est factuel et vérifiable DOIT être vérifié. L'IA peut se tromper, inventer, halluciner.</p>
+
+        <p><strong>LEÇON 2 : La forme ne garantit pas le fond</strong></p>
+        <p>"Philippe Music" et "Philippe Dagobert" SEMBLENT crédibles. Le code HTML était parfaitement formaté, professionnel. Mais le contenu était faux.</p>
+
+        <p><strong>LEÇON 3 : L'IA ne dit pas "Je ne sais pas"</strong></p>
+        <p>C'est peut-être la leçon la plus importante. Quand l'IA manque d'information, elle invente. Elle ne signale pas son ignorance.</p>
+
+        <h3>Pour moi, en tant qu'enseignant</h3>
+        
+        <p>Cette expérience renforce ma conviction : il est urgent d'enseigner l'esprit critique face à l'IA.</p>
+
+        <p>Pas pour diaboliser ces outils. L'IA peut être remarquable à bien des égards : pédagogue, structurée, capable d'analyses fines.</p>
+
+        <p>Mais il faut que nos élèves comprennent ses limites. Qu'ils sachent :</p>
+
+        <p>• Où l'IA est fiable (aide à la rédaction, brainstorming, structuration)<br>
+        • Où elle ne l'est pas (faits précis, identités, chiffres, citations)</p>
+
+        <h3>Pour le protocole AUDIT</h3>
+        
+        <p>Ce cas valide l'approche AUDIT :</p>
+
+        <p>✅ Analyser : détecter les incohérences<br>
+        ✅ Utiliser : mobiliser des sources fiables<br>
+        ✅ Douter : questionner systématiquement<br>
+        ✅ Interroger : vérifier activement<br>
+        ✅ Tirer des conclusions : comprendre les mécanismes</p>
+
+        <p>En moins de 5 minutes, le protocole permet de détecter et corriger l'erreur.</p>
+
+        <h2>Épilogue</h2>
+        
+        <p>À la fin de notre échange, j'ai demandé à Claude de mettre à jour sa mémoire avec mon vrai nom : Philippe DUPEYRAT. Il l'a fait. Il ne m'appellera plus "Music" ou "Dagobert".</p>
+
+        <p>Mais combien d'utilisateurs ont vécu la même chose, avec d'autres erreurs, dans d'autres domaines, sans même s'en apercevoir ?</p>
+
+        <p>Combien d'élèves utilisent ces outils en pensant que toutes les réponses sont fiables ?</p>
+
+        <p>Combien de personnes, parfois dans le cadre professionnel, prennent pour argent comptant des informations générées par l'IA ?</p>
+
+        <p>Cette expérience, aussi frustrante soit-elle, m'a offert le meilleur cas d'étude possible. Dommage qu'elle ne soit pas reproductible…</p>
+
+        <div class="signature">
+            <p class="nom">Philippe DUPEYRAT</p>
+            <p class="fonction">Inspecteur d'Académie - Inspecteur Pédagogique Régional<br>
+            Mathématiques</p>
+            <p class="fonction" style="margin-top: 1rem;">Décembre 2025</p>
+        </div>
+
+        <h2>Post-scriptum : Les vraies réponses de Claude</h2>
+        
+        <p>Pour l'authenticité du témoignage, je reproduis ici quelques copies écran des réponses de Claude lors de son « introspection ». Ces extraits montrent la capacité remarquable de l'IA à analyser ses propres dysfonctionnements… tout en étant structurellement incapable de les éviter. C'est fascinant. Et c'est exactement ce que nos élèves doivent comprendre.</p>
+
+        <img src="ressources/images/hallucination_img_1.png" alt="Capture d'écran : Erreur Philippe Dagobert">
+        <p class="legende">Claude génère "Philippe Dagobert" dans les métadonnées</p>
+
+        <img src="ressources/images/hallucination_img_2.png" alt="Capture d'écran : Résultats de recherche avec DUPEYRAT">
+        <p class="legende">Les résultats de recherche montrent "DUPEYRAT Philippe"</p>
+
+        <img src="ressources/images/hallucination_img_3.png" alt="Capture d'écran : Mea culpa de Claude">
+        <p class="legende">Claude reconnaît ses erreurs : "ERREUR GRAVE DE MA PART"</p>
+
+        <img src="ressources/images/hallucination_img_4.png" alt="Capture d'écran : Auto-analyse de Claude">
+        <p class="legende">Claude analyse ses propres dysfonctionnements avec les méthodes TRIZ et Ishikawa</p>
+
+        <img src="ressources/images/hallucination_img_5.png" alt="Capture d'écran : Schéma du fonctionnement compartimenté">
+        <p class="legende">Schéma explicatif : le fonctionnement compartimenté de l'IA</p>
+    </article>
+
+    <footer>
+        <p>Protocole A.U.D.I.T. — Développer l'esprit critique face à l'IA</p>
+        <p><a href="index.html">Retour à l'accueil</a> • <a href="mailto:philippe.dupeyrat@ac-poitiers.fr">Contact</a></p>
+    </footer>
+</body>
+</html>
