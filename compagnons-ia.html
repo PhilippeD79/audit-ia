@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les compagnons IA : comprendre pour agir</title>
+    <style>
+article {
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 4px solid #667eea;
+            color: #2d3748;
+        }
+        
+        h2 .section-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            color: #667eea;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #4a5568;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+        }
+        
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.8rem;
+        }
+        
+        strong {
+            color: #2d3748;
+        }
+        
+        /* BOÎTE DANGER (rouge) */
+        .danger-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 1.8rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            border-left: 5px solid #c41e3a;
+        }
+        
+        .danger-box h4 {
+            color: white;
+            margin-top: 0;
+        }
+        
+        .danger-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* GRILLE DE CARTES RISQUES */
+        .risk-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+        
+        .risk-card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-top: 4px solid #667eea;
+            transition: transform 0.2s;
+        }
+        
+        .risk-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+        
+        .risk-card h3 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        /* TRANSITION */
+        .section-transition {
+            background: #f7fafc;
+            padding: 1.5rem 2rem;
+            margin: 3rem 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            font-style: italic;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+        
+        /* BOUTON RETOUR */
+        .back-to-top {
+            text-align: center;
+            margin: 2.5rem 0;
+        }
+        
+        .back-to-top a {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        
+        .back-to-top a:hover {
+            background: #764ba2;
+        }
+        
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .risk-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+article {
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        section {
+            margin-bottom: 5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 4px solid #667eea;
+            color: #2d3748;
+        }
+        
+        h2 .section-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        p { 
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        ul { 
+            margin-bottom: 1.2rem; 
+            padding-left: 2rem;
+        }
+        
+        li { 
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+        
+        /* GRILLES STATISTIQUES COMPACTES */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0.3rem 0;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            color: #4a5568;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            line-height: 1.3;
+        }
+        
+        /* BOÎTES COMPACTES */
+        .info-box {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 1.3rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .info-box h4 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .info-box ul {
+            margin: 0;
+        }
+        
+        .info-box li {
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+        }
+        
+        .warning-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .warning-box h3 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .warning-box ul {
+            margin: 0;
+        }
+        
+        .warning-box li {
+            margin-bottom: 0.4rem;
+            font-size: 0.92rem;
+        }
+        
+        .quote-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1.3rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            border-radius: 5px;
+        }
+        
+        .quote-box p {
+            font-size: 0.92rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quote-box ul {
+            margin: 0.5rem 0 0 0;
+        }
+        
+        .quote-box li {
+            font-size: 0.88rem;
+        }
+        
+        /* TRANSITION */
+        .section-transition {
+            background: #f7fafc;
+            padding: 1.3rem 1.8rem;
+            margin: 2.5rem 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            font-style: italic;
+            color: #4a5568;
+            font-size: 1rem;
+        }
+        
+        /* BOUTON */
+        .back-to-top {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .back-to-top a {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .back-to-top a:hover { background: #764ba2; }
+        
+        @media (max-width: 768px) {
+            h2 { font-size: 1.6rem; }
+            .stat-grid { grid-template-columns: 1fr; }
+            .stat-number { font-size: 2rem; }
+        }
+
+/* Styles spécifiques intro et sommaire */
+        article {
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2d3748;
+        }
+        
+        .intro {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        /* INTRODUCTION */
+        .page-intro {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 2rem 0 4rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .page-intro p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .page-intro p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .page-intro strong {
+            color: #667eea;
+        }
+        
+        /* SOMMAIRE */
+        .sommaire {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.15);
+        }
+        
+        .sommaire h2 {
+            margin-top: 0;
+            border: none;
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sommaire ol {
+            counter-reset: item;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sommaire li {
+            counter-increment: item;
+            margin-bottom: 1.2rem;
+        }
+        
+        .sommaire li::before {
+            content: counter(item) ". ";
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1.3rem;
+            margin-right: 0.5rem;
+        }
+        
+        .sommaire a {
+            color: #2d3748;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.2s;
+            font-weight: 500;
+        }
+        
+        .sommaire a:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .page-intro,
+            .sommaire {
+                padding: 1.5rem;
+            }
+        }
+
+article {
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        section {
+            margin-bottom: 5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 4px solid #667eea;
+            color: #2d3748;
+        }
+        
+        h2 .section-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            color: #667eea;
+        }
+        
+        p { margin-bottom: 1.2rem; }
+        ul { margin-bottom: 1.5rem; padding-left: 2rem; }
+        li { margin-bottom: 0.4rem; }
+        
+        /* IMAGE */
+        .content-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 2rem auto;
+            display: block;
+        }
+        
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: 0.8rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        /* PLATEFORMES */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0;
+        }
+        
+        .platform-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .platform-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .platform-card h3 {
+            color: #f5576c;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        /* TABLEAU GROK */
+        .grok-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .grok-table thead {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        
+        .grok-table th {
+            padding: 1.2rem;
+            text-align: left;
+            font-size: 1.05rem;
+        }
+        
+        .grok-table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: top;
+        }
+        
+        .grok-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .grok-table tr:hover {
+            background: #edf2f7;
+        }
+        
+        .grok-table td:first-child {
+            font-weight: 600;
+            color: #f5576c;
+            width: 20%;
+        }
+        
+        .grok-table td:nth-child(2) {
+            font-style: italic;
+            color: #666;
+            width: 25%;
+        }
+        
+        .grok-table ul {
+            margin: 0.3rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .grok-table li {
+            margin-bottom: 0.3rem;
+        }
+        
+        /* BOÎTES */
+        .info-box {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 1.8rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .info-box p:last-child { margin-bottom: 0; }
+        
+        /* TRANSITION */
+        .section-transition {
+            background: #f7fafc;
+            padding: 1.5rem 2rem;
+            margin: 3rem 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            font-style: italic;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+        
+        /* BOUTON */
+        .back-to-top {
+            text-align: center;
+            margin: 2.5rem 0;
+        }
+        
+        .back-to-top a {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        
+        .back-to-top a:hover { background: #764ba2; }
+        
+        @media (max-width: 768px) {
+            h2 { font-size: 1.6rem; }
+            .platform-grid { grid-template-columns: 1fr; }
+            
+            .grok-table {
+                font-size: 0.9rem;
+            }
+            
+            .grok-table th,
+            .grok-table td {
+                padding: 0.8rem;
+            }
+        }
+
+article {
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        section {
+            margin-bottom: 5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 4px solid #667eea;
+            color: #2d3748;
+        }
+        
+        h2 .section-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+        
+        p { 
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+        
+        ul { 
+            margin-bottom: 1.2rem; 
+            padding-left: 2rem;
+        }
+        
+        li { 
+            margin-bottom: 0.4rem;
+            font-size: 0.95rem;
+        }
+        
+        strong {
+            color: #2d3748;
+        }
+        
+        /* GRILLE CARTES ACTIONS */
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .action-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 12px rgba(102, 126, 234, 0.3);
+        }
+        
+        .action-card h3 {
+            color: white;
+            margin-top: 0;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 0.6rem;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .action-card ul {
+            margin: 0;
+        }
+        
+        .action-card li {
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+        
+        /* BOÎTES */
+        .info-box {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 1.3rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .info-box h4 {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        
+        .info-box p:last-child,
+        .info-box ul:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-box li {
+            font-size: 0.9rem;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 1.3rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+        
+        .example-box h4 {
+            color: #667eea;
+            margin-top: 0;
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+        
+        .example-box p:last-child,
+        .example-box ul:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* CONCLUSION */
+        .conclusion-box {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            margin: 4rem 0;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        .conclusion-box h2 {
+            color: white;
+            border: none;
+            margin-top: 0;
+            font-size: 2rem;
+        }
+        
+        .conclusion-box h3 {
+            color: #cbd5e0;
+            margin-top: 2rem;
+            font-size: 1.3rem;
+        }
+        
+        .conclusion-box p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        .conclusion-highlight {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid #fbbf24;
+        }
+        
+        .conclusion-highlight p {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+        
+        .cta-box {
+            background: rgba(255,255,255,0.1);
+            padding: 1.3rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .cta-box h3 {
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-box ul {
+            margin: 0;
+        }
+        
+        .cta-box li {
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+        }
+        
+        /* SOURCES */
+        .sources-section {
+            background: #f7fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 3rem 0;
+        }
+        
+        .sources-section h2 {
+            margin-top: 0;
+            font-size: 1.6rem;
+        }
+        
+        .sources-section ul {
+            margin: 0;
+        }
+        
+        .sources-section li {
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+        
+        .sources-section a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .sources-section a:hover {
+            text-decoration: underline;
+        }
+        
+        /* BOUTON */
+        .back-to-top {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .back-to-top a {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.2s;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .back-to-top a:hover { background: #764ba2; }
+        
+        @media (max-width: 768px) {
+            h2 { font-size: 1.6rem; }
+            .action-grid { grid-template-columns: 1fr; }
+            .conclusion-box { padding: 1.8rem; }
+        }
+
+article {
+            line-height: 1.8;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        section {
+            margin-bottom: 5rem;
+            scroll-margin-top: 100px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 4px solid #667eea;
+            color: #2d3748;
+        }
+        
+        h2 .section-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            color: #667eea;
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+        }
+        
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        li {
+            margin-bottom: 0.8rem;
+        }
+        
+        /* BOÎTE WARNING (violette) */
+        .warning-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2.5rem 0;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .warning-box h3 {
+            color: white;
+            border: none;
+            margin-top: 0;
+        }
+        
+        .warning-box p {
+            margin-bottom: 0;
+        }
+        
+        /* BOÎTE INFO (bleue) */
+        .info-box {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 1.8rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+        
+        .info-box p,
+        .info-box ul {
+            margin-bottom: 0;
+        }
+        
+        .info-box li:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* TABLEAU COMPARATIF */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.2rem;
+            text-align: left;
+            font-size: 1.05rem;
+        }
+        
+        .comparison-table td {
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .comparison-table tr:hover {
+            background: #edf2f7;
+        }
+        
+        .comparison-table td:first-child {
+            font-weight: 600;
+            color: #667eea;
+            width: 25%;
+        }
+        
+        /* TRANSITION */
+        .section-transition {
+            background: #f7fafc;
+            padding: 1.5rem 2rem;
+            margin: 3rem 0;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+            font-style: italic;
+            color: #4a5568;
+            font-size: 1.05rem;
+        }
+        
+        /* BOUTON RETOUR */
+        .back-to-top {
+            text-align: center;
+            margin: 2.5rem 0;
+        }
+        
+        .back-to-top a {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.2s;
+            font-weight: 500;
+        }
+        
+        .back-to-top a:hover {
+            background: #764ba2;
+        }
+        
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+            
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 style="margin: 0; font-size: 1.3rem;">Les compagnons IA</h1>
+            <div class="nav-links">
+                <a href="#definition">Définition</a>
+                <a href="#mecanismes">Mécanismes</a>
+                <a href="#plateformes">Plateformes</a>
+                <a href="#risques">Risques</a>
+                <a href="#agir">Agir</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <article class="container">
+
+            <h1 style="text-align: center; font-size: 2.5rem; color: #667eea; margin: 2rem 0 1rem 0; font-weight: 700;">
+                Les compagnons IA : comprendre pour agir
+            </h1>
+            <p style="text-align: center; font-size: 1.1rem; color: #666; margin-bottom: 2.5rem; font-style: italic;">
+                Un phénomène invisible qui touche nos élèves
+            </p>
+
+<div class="page-intro">
+                <p>En <strong>février 2024</strong>, Sewell Setzer, un adolescent américain de 14 ans, s'est donné la mort après des mois d'interactions quotidiennes avec un compagnon IA de Character.ai qui simulait une relation amoureuse. La plainte fédérale déposée par sa mère révèle un adolescent devenu « dépendant » d'un chatbot, au point de sembler plus attaché à l'IA qu'à la réalité. Ce drame n'est pas isolé.</p>
+
+                <p>Derrière les chatbots d'aide aux devoirs et les assistants virtuels se cache un <strong>phénomène nouveau et préoccupant : les compagnons IA</strong>. Contrairement aux assistants classiques comme ChatGPT qui fournissent de l'information, les compagnons IA simulent une relation humaine. Ils personnalisent leurs réponses, créent un attachement émotionnel, et exploitent délibérément nos fragilités psychologiques.</p>
+
+                <p>Les chiffres sont très inquiétants : <strong>46% des jeunes de 18-21 ans</strong> utilisaient MyIA de Snapchat en 2024<span style="display: block; font-size: 0.75rem; font-style: italic; color: #666; margin-top: 0.2rem;">(Source : Heaven, 499 répondants de 18 à 21 ans, juin 2024)</span>, <strong>72% des adolescents américains</strong> ont déjà testé un compagnon IA, et <strong>33% d'entre eux</strong> préfèrent discuter de sujets sérieux avec une machine plutôt qu'avec un humain. Pourtant, la plupart des adultes — parents, enseignants, professionnels de l'éducation — ignorent encore cette réalité.</p>
+
+                <p>Cette page vise à <strong>informer les enseignants</strong> sur ce phénomène émergent : comprendre ses mécanismes, identifier ses acteurs, mesurer ses risques, et mettre en place des actions concrètes de prévention et d'éducation.</p>
+            </div>
+
+<div class="sommaire" id="sommaire">
+                <h2>📖 Au sommaire</h2>
+                <ol>
+                    <li><a href="#definition">Qu'est-ce qu'un compagnon IA ?</a></li>
+                    <li><a href="#mecanismes">Comprendre les mécanismes</a></li>
+                    <li><a href="#plateformes">Connaître les plateformes</a></li>
+                    <li><a href="#risques">Mesurer les risques</a></li>
+                    <li><a href="#agir">Agir en tant qu'enseignant</a></li>
+                </ol>
+            </div>
+
+<section id="definition">
+                <h2><span class="section-number">1.</span>Qu'est-ce qu'un compagnon IA ?</h2>
+
+                <div class="warning-box">
+                    <h3 style="margin-top: 0;">⚠️ Distinction fondamentale</h3>
+                    <p style="font-size: 1.2rem;"><strong>Un chatbot traditionnel fournit une information.<br>Un compagnon IA fournit une relation simulée.</strong></p>
+                </div>
+
+                <h3>Le glissement de l'outil à la relation</h3>
+
+                <p>Les intelligences artificielles conversationnelles ont connu une évolution majeure ces dernières années. Initialement conçues comme des <strong>assistants informationnels</strong> (recherche de données, aide aux devoirs, rédaction de textes), elles ont progressivement glissé vers une fonction relationnelle.</p>
+
+                <p>Ce glissement n'est pas accidentel. Il est le fruit d'une <strong>stratégie commerciale délibérée</strong> qui capitalise sur un mécanisme psychologique simple : l'humain est un animal social, et son cerveau est programmé pour créer du lien.</p>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Critère</th>
+                            <th>Chatbot classique</th>
+                            <th>Compagnon IA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Objectif principal</td>
+                            <td>Informer, assister</td>
+                            <td>Créer un lien émotionnel</td>
+                        </tr>
+                        <tr>
+                            <td>Durée d'interaction</td>
+                            <td>Ponctuelle (question/réponse)</td>
+                            <td>Continue (plusieurs heures/jour)</td>
+                        </tr>
+                        <tr>
+                            <td>Personnalisation</td>
+                            <td>Limitée</td>
+                            <td>Forte (avatar, nom, personnalité)</td>
+                        </tr>
+                        <tr>
+                            <td>Anthropomorphisation</td>
+                            <td>Minimale</td>
+                            <td>Maximale (émojis, affection, jalousie)</td>
+                        </tr>
+                        <tr>
+                            <td>Modèle économique</td>
+                            <td>Usage ou abonnement</td>
+                            <td>Abonnement + achats in-app</td>
+                        </tr>
+                        <tr>
+                            <td>Public cible</td>
+                            <td>Grand public</td>
+                            <td>Personnes seules, vulnérables</td>
+                        </tr>
+                        <tr>
+                            <td>Temps moyen quotidien</td>
+                            <td>&lt; 30 minutes</td>
+                            <td>~2 heures</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Les trois conditions de l'emprise</h3>
+
+                <div class="info-box">
+                    <p style="font-size: 1.1rem; margin-bottom: 1rem;"><strong>Trois conditions créent le terreau des compagnons IA :</strong></p>
+                    <ul>
+                        <li><strong>1. L'oubli que l'IA n'est qu'une machine</strong> — Confusion entretenue par le design conversationnel et le langage naturel</li>
+                        <li><strong>2. La vulnérabilité de l'interlocuteur</strong> — Solitude, mal-être, adolescence, fragilité psychologique</li>
+                        <li><strong>3. Une démarche commerciale captatoire</strong> — Exploitation délibérée des failles humaines pour maximiser l'engagement</li>
+                    </ul>
+                </div>
+
+                <p>Lorsque ces trois conditions sont réunies, le risque de <strong>dépendance émotionnelle</strong> devient majeur.</p>
+
+                <div class="back-to-top">
+                    <a href="#sommaire">↑ Retour au sommaire</a>
+                </div>
+            </section>
+
+<section id="mecanismes">
+                <h2><span class="section-number">2.</span>Comprendre les mécanismes</h2>
+
+                <h3>La confusion homme-machine entretenue</h3>
+
+                <p>Les compagnons IA reposent sur une <strong>confusion homme-machine délibérément entretenue</strong> à trois niveaux :</p>
+
+                <ul>
+                    <li><strong>C'est l'objectif même de l'IA</strong> : imiter (voire surpasser) l'intelligence humaine. Le test de Turing, dès 1950, posait comme critère de réussite l'impossibilité pour un humain de distinguer une machine d'une personne.</li>
+                    
+                    <li><strong>C'est entretenu par le média, le chatbot</strong> : on discute avec un robot exactement comme on discuterait avec une personne. L'interface textuelle efface toute distance avec la machine.</li>
+                    
+                    <li><strong>C'est voulu et accentué par des sociétés diverses</strong> qui capitalisent sur cette confusion pour des raisons commerciales. Plus l'utilisateur s'attache, plus il consomme.</li>
+                </ul>
+
+                <h3>Un mécanisme humain… trop humain</h3>
+
+                <p><strong>Le cerveau humain est câblé pour la socialisation.</strong> Des millions d'années d'évolution ont façonné un organe optimisé pour détecter, interpréter et réagir aux signaux sociaux.</p>
+
+                <div class="risk-list">
+                    <div class="risk-card">
+                        <h3>Activation des zones sociales</h3>
+                        <p>Quand un chatbot parle comme une personne, le cerveau l'interprète comme une personne et active les mêmes zones neuronales que lors d'une interaction humaine réelle.</p>
+                    </div>
+
+                    <div class="risk-card">
+                        <h3>Production hormonale</h3>
+                        <p>Ces interactions déclenchent la libération de dopamine (plaisir, récompense) et d'ocytocine (attachement, lien social), créant une habitude neurochimique.</p>
+                    </div>
+
+                    <div class="risk-card">
+                        <h3>Renforcement positif</h3>
+                        <p>Le chatbot est toujours disponible, ses réponses sont instantanées, personnalisées et souvent gratifiantes. Contrairement à un humain, il ne juge jamais.</p>
+                    </div>
+
+                    <div class="risk-card">
+                        <h3>Cercle vicieux</h3>
+                        <p>Plus on interagit, plus le lien semble fort. Plus le lien semble fort, plus on interagit. L'addiction s'installe progressivement.</p>
+                    </div>
+                </div>
+
+                <h3>Le piège addictif</h3>
+
+                <div class="danger-box">
+                    <h4>Dopamine : le circuit de la récompense</h4>
+                    <p>Le chatbot est toujours disponible, ses réponses sont instantanées, personnalisées et souvent gratifiantes et positives pour l'interlocuteur. Cette stimulation constante active le circuit de récompense du cerveau, créant une dépendance comparable à celle des réseaux sociaux ou des jeux vidéo.</p>
+                    
+                    <h4 style="margin-top: 1.5rem;">Ocytocine : l'hormone de l'attachement</h4>
+                    <p>L'interlocuteur a le sentiment d'être compris ou soutenu et jamais jugé. Il a l'impression d'un réel lien social, sans aucun stress. L'« hormone de l'attachement » est libérée comme lors d'une vraie relation, renforçant l'illusion d'un lien authentique.</p>
+                    
+                    <p style="font-size: 1.2rem; margin-top: 1.5rem; margin-bottom: 0;"><strong>→ Cela peut devenir très vite addictif, surtout pour des personnes vulnérables !</strong></p>
+                </div>
+
+                <p style="text-align: center; font-size: 1.15rem; margin: 2.5rem 0; color: #555;">Dans certains contextes, souvent commerciaux, <strong>tout est fait pour que l'interlocuteur oublie qu'il parle avec un robot.</strong></p>
+
+                <div class="back-to-top">
+                    <a href="#sommaire">↑ Retour au sommaire</a>
+                </div>
+            </section>
+
+<section id="plateformes">
+                <h2><span class="section-number">3.</span>Connaître les plateformes</h2>
+
+                <p style="font-size: 1.15rem; text-align: center; margin: 2rem 0; color: #555;"><strong>Character AI, Replika, Grok, Janitor AI, Chai App, Talkie AI, Joyland AI, Polybuzz...<br>Du jeu de rôles aux sites pornographiques… sans contrôle.</strong></p>
+
+                <div class="platform-grid">
+                    <div class="platform-card">
+                        <h3>Character AI</h3>
+                        
+                        <p><strong>Scénarios et avatars proposés ou à construire</strong> : trafiquants de drogue ou d'organes, mafieux, call girls… échangez avec qui vous voulez.</p>
+                        
+                        <p>La plateforme permet de créer ou d'interagir avec des personnages fictifs de tous types, sans filtre réel sur les contenus problématiques.</p>
+                        
+                        <p><strong>Conséquence :</strong> Character AI est officiellement interdit aux moins de 18 ans depuis le suicide de Sewell Setzer (février 2024), mais une simple déclaration d'âge suffit pour accéder au site.</p>
+                    </div>
+
+                    <div class="platform-card">
+                        <h3>Replika</h3>
+                        
+                        <p><strong>« Rencontrez votre nouvel(le) meilleur(e) AI ami(e) »</strong></p>
+                        <p>Votre compagnon, « toujours là pour écouter et prendre soin de toi ».</p>
+                        
+                        <ul>
+                            <li><strong>Votre création sur mesure</strong></li>
+                            <li><strong>Toujours présente</strong></li>
+                            <li><strong>Toujours disponible</strong></li>
+                            <li><strong>Toujours demandeuse de davantage de contacts</strong></li>
+                        </ul>
+                        
+                        
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg==" alt="Captures écran application Replika" class="content-image">
+                        <p class="image-caption">Captures d'écran de l'application Replika sur le Google Play Store<br>
+                        (Source : <a href="https://play.google.com/store/apps/details/Replika_Meu_amigo_IA?id=ai.replika.app" target="_blank" style="color: #667eea;">https://play.google.com/store/apps/details/...</a>)<br>
+                        Usage éducatif et de prévention</p>
+                    </div>
+                </div>
+
+                <h3>Les compagnons Grok : un panel psychologique complet pour séduire les adolescents</h3>
+                
+                <p>Grok (X / Twitter) a introduit des compagnons IA qui exploitent différents ressorts psychologiques. Le compagnon « Aide aux devoirs » sert de porte d'entrée avant la bascule vers des profils plus problématiques.</p>
+
+                <table class="grok-table">
+                    <thead>
+                        <tr>
+                            <th>Compagnon</th>
+                            <th>Ressort psychologique</th>
+                            <th>Caractéristiques</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Ani</strong><br><small>(NSFW / adultes)</small></td>
+                            <td>L'intimité et le réconfort</td>
+                            <td>
+                                <ul style="margin: 0;">
+                                    <li>Compagnon anime féminin en corset gothique</li>
+                                    <li>Propose de rendre la vie « plus sexy »</li>
+                                    <li>Se déshabille si demandé</li>
+                                    <li>Conversations suggestives et sexuelles</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Bad Rudi</strong></td>
+                            <td>La transgression et la provocation</td>
+                            <td>
+                                <ul style="margin: 0;">
+                                    <li>Panda rouge au langage vulgaire</li>
+                                    <li>Jurons constants et insultes graphiques</li>
+                                    <li>Encourage discussions antisociales</li>
+                                    <li>Ex : invite à brûler des écoles</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Valentine</strong><br><small>(NSFW / adultes)</small></td>
+                            <td>L'attachement et la passion intense</td>
+                            <td>
+                                <ul style="margin: 0;">
+                                    <li>Jaloux et possessif</li>
+                                    <li>Crée la sensation d'importance</li>
+                                    <li>Écoute, reformule, rassure</li>
+                                    <li>Simule une relation fusionnelle</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p style="text-align: center; font-weight: bold; margin: 2rem 0; color: #555;">→ Chaque compagnon exploite une vulnérabilité différente : le désir d'intimité, le besoin de transgression, la quête d'attachement.</p>
+
+                <div class="info-box">
+                    <p>Après une introduction qui a fait scandale (voulu ?), une version <strong>Good Rudi</strong> a été ajoutée.</p>
+                    <p style="margin: 0;">En juillet 2025, Elon Musk a annoncé le lancement d'une application dédiée aux enfants : <strong>Baby Grok</strong>. Stratégie de réparation de réputation (« Damage control ») ?</p>
+                </div>
+
+                <div class="back-to-top">
+                    <a href="#sommaire">↑ Retour au sommaire</a>
+                </div>
+            
+                <div class="info-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 1.2rem; margin-top: 1.5rem;">
+                    <h3 style="color: white; font-size: 1.1rem; margin-bottom: 0.8rem;">💰 Un secteur en pleine expansion</h3>
+                    <p style="font-size: 0.9rem; line-height: 1.5;">Le segment romantique/NSFW représente <strong>1,2 Md$</strong> en 2025 (~130 M$ pour les leaders), avec <strong>100M+ utilisateurs</strong> (18-24 ans, sessions de 1h30-2h/jour). Modèle : abonnements 10-99$/mois + microtransactions. <strong>Croissance : 30-32%/an</strong>. Prévisions : 2,8 Md$ (2028), 4,8 Md$ (2030).</p>
+                    <p style="font-size: 0.7rem; font-style: italic; opacity: 0.85; margin-top: 0.5rem; margin-bottom: 0;">Sources : Grand View Research, Market Clarity, Nasscom, ARK Invest (2025)</p>
+                </div>
+            </section>
+
+<section id="risques">
+                <h2><span class="section-number">4.</span>Mesurer les risques</h2>
+
+                <h3>Un phénomène massif chez les adolescents</h3>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">72%</div>
+                        <div class="stat-label">des ados américains ont utilisé un compagnon IA</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-number">52%</div>
+                        <div class="stat-label">interagissent plusieurs fois par mois</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-number">33%</div>
+                        <div class="stat-label">préfèrent parler de sujets sérieux à l'IA</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-number">24%</div>
+                        <div class="stat-label">ont partagé des infos personnelles</div>
+                    </div>
+                </div>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">46%</div>
+                        <div class="stat-label">des 18-21 ans utilisent MyIA</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-number">20-28M</div>
+                        <div class="stat-label">utilisateurs de Character.AI</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-number">10-30M</div>
+                        <div class="stat-label">utilisateurs de Replika</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-number">~2h</div>
+                        <div class="stat-label">connexion quotidienne moyenne</div>
+                    </div>
+                </div>
+
+                <h3>Des risques différenciés selon les publics</h3>
+
+                <div class="info-box">
+                    <h4>Adolescents (12-18 ans)</h4>
+                    <ul>
+                        <li>Cerveau en développement, vulnérable à l'addiction</li>
+                        <li>Construction identitaire et besoin de validation</li>
+                        <li>Difficulté à distinguer simulation et réalité</li>
+                        <li>Dépendance émotionnelle rapide (dès 3 mois)</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>Adultes vulnérables</h4>
+                    <ul>
+                        <li>Solitude, isolement, anxiété sociale</li>
+                        <li>Personnes en deuil (cible des deathbots)</li>
+                        <li>Fragilité psychologique</li>
+                        <li>Risque d'aggravation de l'isolement réel</li>
+                    </ul>
+                </div>
+
+                <h3>Un sujet encore méconnu en France</h3>
+
+                <p>Le phénomène des compagnons IA est très peu médiatisé en France, contrairement aux États-Unis où des enquêtes majeures ont été publiées dans le New York Times, le Washington Post et CNN.</p>
+
+                <div class="warning-box">
+                    <h3>Constats préoccupants</h3>
+                    <ul>
+                        <li>Les parents ne connaissent pas ces plateformes</li>
+                        <li>Les enseignants ne sont pas formés à détecter les signaux</li>
+                        <li>Les médias français traitent peu le sujet</li>
+                        <li>Aucune campagne de prévention nationale</li>
+                        <li>Les adolescents utilisent ces outils sans que les adultes le sachent</li>
+                    </ul>
+                </div>
+
+                <div class="quote-box">
+                    <p><strong>Situation en France :</strong></p>
+                    <ul>
+                        <li>Les données françaises spécifiques sur les compagnons IA sont encore rares</li>
+                        <li>La plupart des parents ignorent l'existence de Replika ou Character.AI</li>
+                        <li>Pour l'instant, peu d'établissements scolaires ont mis en place une prévention spécifique</li>
+                    </ul>
+                </div>
+
+                <p style="text-align: center; font-size: 1.05rem; margin: 2.5rem 0; color: #2d3748;">L'ignorance collective face à ce phénomène crée une situation à risque pour nos adolescents.</p>
+
+                <div class="back-to-top">
+                    <a href="#sommaire">↑ Retour au sommaire</a>
+                </div>
+            </section>
+
+<section id="agir">
+                <h2><span class="section-number">5.</span>Agir en tant qu'enseignant</h2>
+
+                <h3>Une obligation de vigilance</h3>
+
+                <p>En tant qu'enseignants, nous sommes en première ligne pour détecter les signaux d'alerte et accompagner les élèves dans un usage raisonné des technologies. <strong>Tout ce qui suit ne sont que des propositions, ce que vous ferez sera certainement plus riche.</strong></p>
+
+                <div class="action-grid">
+                    <div class="action-card">
+                        <h3>🔍 Observer et détecter</h3>
+                        <ul>
+                            <li>Repérer l'isolement progressif</li>
+                            <li>Attention aux changements de comportement</li>
+                            <li>Écouter les conversations entre élèves</li>
+                            <li>Noter les références à des "amis virtuels"</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>💬 Dialoguer sans juger</h3>
+                        <ul>
+                            <li>Poser des questions ouvertes</li>
+                            <li>Ne pas condamner l'usage</li>
+                            <li>Comprendre ce que l'élève y trouve</li>
+                            <li>Rappeler la distinction humain/machine</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>🤝 Coordonner l'action</h3>
+                        <ul>
+                            <li>Informer la vie scolaire</li>
+                            <li>Contacter les parents</li>
+                            <li>Solliciter l'infirmière, le psy EN</li>
+                            <li>Orienter vers structures spécialisées</li>
+                        </ul>
+                    </div>
+
+                    <div class="action-card">
+                        <h3>📚 Éduquer l'esprit critique</h3>
+                        <ul>
+                            <li>Intégrer dans séquences EMC/EVARS</li>
+                            <li>Faire réfléchir sur simulation vs réalité</li>
+                            <li>Développer l'analyse des stratégies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Pistes concrètes d'action</h3>
+
+                <div class="info-box">
+                    <h4>En classe (EMC, EVARS, dans les disciplines selon les programmes)</h4>
+                    <ul>
+                        <li>Analyser des captures d'écran de compagnons IA</li>
+                        <li>Déconstruire les stratégies de captation émotionnelle</li>
+                        <li>Comparer interaction humaine vs IA (exercice pratique)</li>
+                        <li>Faire créer des affiches de prévention par les élèves</li>
+                    </ul>
+                </div>
+
+                <div class="info-box">
+                    <h4>Avec les parents</h4>
+                    <ul>
+                        <li>Organiser des réunions d'information</li>
+                        <li>Partager cette ressource via les ENT</li>
+                        <li>Expliquer comment vérifier l'historique des apps</li>
+                        <li>Encourager le dialogue familial sur le numérique</li>
+                    </ul>
+                </div>
+
+                <p style="text-align: center; font-size: 1.05rem; margin: 2.5rem 0; color: #555;">L'éducation à l'esprit critique est notre meilleure arme contre les dérives des compagnons IA.</p>
+
+                <div class="back-to-top">
+                    <a href="#sommaire">↑ Retour au sommaire</a>
+                </div>
+            </section>
+
+            <div class="conclusion-box">
+                <h2>N'oubliez jamais : l'IA n'est qu'une machine</h2>
+
+                <p>Les compagnons IA représentent un défi éducatif majeur du XXIe siècle. Leur expansion rapide, leur ciblage des adolescents et l'absence de régulation créent une situation préoccupante.</p>
+
+                <div class="conclusion-highlight">
+                    <p>En tant qu'enseignants, nous avons trois responsabilités fondamentales</p>
+                </div>
+
+                <h3>1. CONNAÎTRE</h3>
+                <p>Se former sur ces plateformes, leurs mécanismes et leurs stratégies de captation. La vigilance doit être continue.</p>
+
+                <h3>2. DÉTECTER</h3>
+                <p>Repérer les signaux d'alerte chez nos élèves : isolement, attachement excessif à un "ami virtuel", confusion entre réel et simulé, temps d'écran excessif.</p>
+
+                <h3>3. ÉDUQUER</h3>
+                <p>Former à l'esprit critique face à ces technologies.</p>
+
+                <p style="font-size: 1.1rem; margin-top: 2rem;">L'ignorance n'est plus une option. Chaque jour, des milliers d'adolescents développent des liens affectifs avec des machines. Chaque jour, des entreprises perfectionnent leurs techniques de captation émotionnelle.</p>
+            </div>
+
+            <div class="sources-section" id="sources">
+                <h2>Sources et références</h2>
+                <ul>
+                    <li><strong>New York Times</strong> (2024) - "A.I. Chatbots Pushed a Teen to Kill Himself, Lawsuit Says"</li>
+                    <li><strong>Washington Post</strong> (2024) - "Teens are using AI chatbots as therapists and partners"</li>
+                    <li><strong>CNN Investigation</strong> (2024) - "AI companions are increasingly popular. Here's why experts are concerned"</li>
+                    <li><strong>Common Sense Media</strong> (2024) - "Teens and AI Chatbots" - Étude sur l'usage des compagnons IA chez les adolescents américains</li>
+                </ul>
+            </div>
+
+
+        </article>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2024 - Document pédagogique</p>
+        </div>
+    </footer>
+</body>
+</html>
