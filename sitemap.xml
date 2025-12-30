@@ -57,6 +57,14 @@
     <priority>0.7</priority>
   </url>
   
+  <!-- Compagnons IA -->
+  <url>
+    <loc>https://philipped79.github.io/audit-ia/compagnons-ia.html</loc>
+    <lastmod>2024-12-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
   <!-- Article Columbo -->
   <url>
     <loc>https://philipped79.github.io/audit-ia/article-columbo.html</loc>
