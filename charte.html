@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charte d'utilisation — Protocole A.U.D.I.T.</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --couleur-fond: #FAFAFA;
+            --couleur-texte: #1a1a1a;
+            --couleur-accent: #1E3A5F;
+            --couleur-accent-hover: #2B4A6F;
+            --couleur-accent-clair: #E3EDF7;
+            --couleur-or: #D4A847;
+            --couleur-gris: #5C6370;
+            --couleur-gris-clair: #F5F5F5;
+            --font-titre: 'Source Serif 4', Georgia, serif;
+            --font-corps: 'IBM Plex Sans', system-ui, sans-serif;
+            --max-width: 800px;
+            --espacement: 2rem;
+            --ombre-legere: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-corps);
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            z-index: 100;
+            padding: 0.9rem var(--espacement);
+            box-shadow: var(--ombre-legere);
+        }
+
+        nav .nav-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: var(--font-titre);
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--couleur-accent);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        nav .logo span { color: var(--couleur-or); }
+
+        nav ul { display: flex; list-style: none; gap: 2.5rem; }
+
+        nav a {
+            color: var(--couleur-gris);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover { color: var(--couleur-accent); }
+
+        /* Contenu principal */
+        main {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 6rem var(--espacement) 4rem;
+        }
+
+        /* Titre principal */
+        .page-title {
+            font-family: var(--font-titre);
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--couleur-accent);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .page-subtitle {
+            color: var(--couleur-gris);
+            font-size: 1rem;
+            margin-bottom: 3rem;
+            font-weight: 500;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: var(--ombre-legere);
+        }
+
+        section h2 {
+            font-family: var(--font-titre);
+            font-size: 1.8rem;
+            color: var(--couleur-accent);
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        section h3 {
+            font-family: var(--font-titre);
+            font-size: 1.3rem;
+            color: var(--couleur-accent);
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        section p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        section li {
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
+        }
+
+        section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        section ol li {
+            margin-bottom: 0.6rem;
+        }
+
+        /* Emphase */
+        strong { color: var(--couleur-accent); font-weight: 600; }
+
+        /* Liens */
+        a {
+            color: var(--couleur-accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        a:hover { border-bottom-color: var(--couleur-accent); }
+
+        /* Badge date */
+        .date-badge {
+            display: inline-block;
+            background: var(--couleur-accent-clair);
+            color: var(--couleur-accent);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+        }
+
+        /* Contact encodé */
+        #email-link {
+            display: inline-block;
+            background: var(--couleur-accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        #email-link:hover {
+            background: var(--couleur-accent-hover);
+            border-bottom: none;
+        }
+
+        /* Message noscript */
+        noscript p {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        /* Signature */
+        .signature {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--couleur-accent-clair);
+            color: var(--couleur-gris);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 3rem var(--espacement);
+            text-align: center;
+            color: var(--couleur-gris);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+
+        footer a {
+            color: var(--couleur-accent);
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul { gap: 1.5rem; font-size: 0.85rem; }
+            .page-title { font-size: 2.2rem; }
+            section { padding: 1.8rem; }
+            section h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="logo">A.U.D.I.<span>T</span>.</a>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="fondements.html">Fondements</a></li>
+            <li><a href="charte.html">Charte</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <h1 class="page-title">Charte d'utilisation du site</h1>
+    <div class="date-badge">Dernière mise à jour : 31 décembre 2025</div>
+
+    <section>
+        <h2>Bienvenue</h2>
+        <p>Ce site partage des ressources pédagogiques pour développer l'esprit critique face à l'intelligence artificielle. Il est édité à titre personnel par Philippe Dupeyrat, Inspecteur pédagogique régional de mathématiques.</p>
+        <p><strong>Ce site n'est pas un site officiel du ministère de l'Éducation nationale, de la Jeunesse et des Sports.</strong> Les opinions exprimées n'engagent que leur auteur.</p>
+    </section>
+
+    <section>
+        <h2>Acceptation de la charte</h2>
+        <p>L'accès et l'utilisation du site impliquent l'acceptation pleine et entière de la présente charte. En cas de désaccord, l'utilisateur s'engage à ne pas utiliser le site.</p>
+    </section>
+
+    <section>
+        <h2>Droits d'auteur et propriété intellectuelle</h2>
+        <ul>
+            <li>Tous les contenus publiés sur ce site sont protégés par le droit d'auteur.</li>
+            <li><strong>Les ressources pédagogiques</strong> (fiches élèves, fiches enseignants, documents PDF) sont mises à disposition selon les termes de la licence <strong>Creative Commons — Attribution — Pas d'Utilisation Commerciale — Partage dans les Mêmes Conditions 4.0 International (CC BY-NC-SA 4.0)</strong>.</li>
+            <li><strong>Les images et citations tierces</strong> conservent leur licence d'origine et ne sont pas couvertes par la licence CC BY-NC-SA 4.0.</li>
+            <li><strong>Toute reproduction ou utilisation de contenus</strong> doit mentionner la source et respecter les conditions de la licence.</li>
+            <li><strong>L'utilisation de contenus à des fins commerciales est interdite.</strong></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Usage pédagogique</h2>
+        <ul>
+            <li>Les ressources de ce site sont destinées aux enseignants et élèves.</li>
+            <li>Leur utilisation en classe est encouragée dans le respect de la licence CC BY-NC-SA 4.0.</li>
+            <li>Les adaptations et modifications sont autorisées à condition de :
+                <ol>
+                    <li>Mentionner la source originale</li>
+                    <li>Partager les versions modifiées sous la même licence</li>
+                    <li>Ne pas en faire un usage commercial</li>
+                </ol>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Utilisation de l'intelligence artificielle</h2>
+        <p><strong>Par souci de transparence et de cohérence avec l'esprit critique du protocole A.U.D.I.T. :</strong></p>
+        <ul>
+            <li>Ce site a été créé avec l'assistance d'outils d'intelligence artificielle (IA générative) pour la conception technique, la mise en page et l'optimisation du contenu.</li>
+            <li>Les contenus pédagogiques (protocole AUDIT, fiches, exemples) restent sous la responsabilité éditoriale de l'auteur.</li>
+            <li>L'utilisation de l'IA pour ce projet illustre l'importance de développer un regard critique sur ces outils, comme le promeut ce site.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Données et hébergement</h2>
+        <ul>
+            <li><strong>Ce site ne collecte AUCUNE donnée personnelle.</strong></li>
+            <li><strong>Hébergement :</strong> Ce site est hébergé par <strong>GitHub Pages</strong> (GitHub, Inc., États-Unis)
+                <ul style="list-style: none; margin-left: 0;">
+                    <li style="margin-top: 0.5rem;">URL : <a href="https://philipped79.github.io/audit-ia/">https://philipped79.github.io/audit-ia/</a></li>
+                </ul>
+            </li>
+            <li><strong>Collecte par l'hébergeur :</strong> GitHub Pages peut collecter des données techniques (adresse IP, type de navigateur, pages visitées) pour le fonctionnement du service, conformément à sa politique de confidentialité :
+                <ul style="list-style: none; margin-left: 0;">
+                    <li style="margin-top: 0.5rem;"><a href="https://docs.github.com/fr/site-policy/privacy-policies/github-privacy-statement" target="_blank">Politique de confidentialité GitHub</a></li>
+                </ul>
+            </li>
+            <li><strong>L'éditeur du site n'a pas accès à ces données.</strong></li>
+            <li><strong>Cookies :</strong> Ce site n'utilise pas de cookies de suivi ou d'analytics.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Responsabilité éditoriale</h2>
+        <ul>
+            <li>Le responsable du site s'efforce de publier des informations exactes et mises à jour, mais ne peut garantir l'absence d'erreurs.</li>
+            <li>Les utilisateurs sont invités à signaler toute erreur ou inexactitude via l'adresse de contact ci-dessous.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Liens externes</h2>
+        <ul>
+            <li>Le site peut contenir des liens vers des sites externes.</li>
+            <li>Le responsable du site ne saurait être tenu responsable du contenu de ces sites.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Contact</h2>
+        <p><strong>Pour toute question, signaler une erreur ou suggérer une amélioration :</strong></p>
+        <p style="margin-top: 1.5rem;">
+            <a href="#" id="email-link" onclick="revealEmail(); return false;">
+                📧 Afficher l'adresse email
+            </a>
+        </p>
+        <noscript>
+            <p><em>Veuillez activer JavaScript pour afficher l'adresse email.</em></p>
+        </noscript>
+    </section>
+
+    <section>
+        <h2>Modification de la charte</h2>
+        <ul>
+            <li>La présente charte peut être modifiée à tout moment.</li>
+            <li>Les utilisateurs sont invités à la consulter régulièrement.</li>
+            <li>La date de dernière mise à jour est indiquée en haut de cette page.</li>
+        </ul>
+    </section>
+
+    <div class="signature">
+        Philippe Dupeyrat
+    </div>
+</main>
+
+<footer>
+    <p>
+        <a href="index.html">Accueil</a> • 
+        <a href="fondements.html">Fondements</a> • 
+        <a href="charte.html">Charte</a>
+    </p>
+    <p style="margin-top: 1rem; color: var(--couleur-gris);">
+        Protocole A.U.D.I.T. — Esprit critique et Intelligence Artificielle
+    </p>
+</footer>
+
+<script>
+// Email encodé contre spam
+// Format : philippe.dupeyrat@ac-poitiers.fr
+function revealEmail() {
+    // Email encodé en plusieurs parties pour plus de sécurité
+    var user = 'philippe.dupeyrat';
+    var domain = 'ac-poitiers';
+    var tld = 'fr';
+    var email = user + '@' + domain + '.' + tld;
+    
+    // Créer le lien mailto
+    var link = document.getElementById('email-link');
+    link.href = 'mailto:' + email;
+    link.textContent = '📧 ' + email;
+    link.onclick = null; // Désactiver le onclick après révélation
+    
+    return true;
+}
+</script>
+
+</body>
+</html>
