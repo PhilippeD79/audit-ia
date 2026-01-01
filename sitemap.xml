@@ -1,84 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  
-  <!-- Page d'accueil -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  
-  <!-- Page Fondements -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/fondements.html</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  
-  <!-- Séquence 1 -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/sequence-1.html</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Séquence 2 -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/sequence-2.html</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Séquence 3 -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/sequence-3.html</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Séquence 4 -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/sequence-4.html</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  
-  <!-- Cas d'hallucination -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/cas-hallucination.html</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- Compagnons IA -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/compagnons-ia.html</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- Article Columbo -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/article-columbo.html</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- Charte -->
-  <url>
-    <loc>https://philipped79.github.io/audit-ia/charte.html</loc>
-    <lastmod>2025-12-31</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
+<url>
+<loc>https://philipped79.github.io/audit-ia/</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
+<url>
+<loc>https://philipped79.github.io/audit-ia/fondements.html</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
+<url>
+<loc>https://philipped79.github.io/audit-ia/sequence-1.html</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
+<url>
+<loc>https://philipped79.github.io/audit-ia/sequence-2.html</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
+<url>
+<loc>https://philipped79.github.io/audit-ia/sequence-3.html</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
+<url>
+<loc>https://philipped79.github.io/audit-ia/sequence-4.html</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
+<url>
+<loc>https://philipped79.github.io/audit-ia/cas-hallucination.html</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
+<url>
+<loc>https://philipped79.github.io/audit-ia/compagnons-ia.html</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
+<url>
+<loc>https://philipped79.github.io/audit-ia/article-columbo.html</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
+<url>
+<loc>https://philipped79.github.io/audit-ia/charte.html</loc>
+<lastmod>2025-12-31</lastmod>
+</url>
 </urlset>
