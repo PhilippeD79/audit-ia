@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Séquence 5 - RED TEAMING | AUDIT-IA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #2c3e50;
+            padding-bottom: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+        }
+        
+        h2 {
+            color: #34495e;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        h3 {
+            color: #34495e;
+            font-size: 1.2em;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .pdf-link {
+            display: inline-block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .pdf-link:hover {
+            background-color: #2980b9;
+        }
+        
+        .pdf-link::before {
+            content: "📄 ";
+        }
+        
+        blockquote {
+            background-color: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 15px 20px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+        
+        .emphasis {
+            font-weight: bold;
+            color: #e74c3c;
+        }
+        
+        ul {
+            margin: 15px 0 15px 30px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+        }
+        
+        .separator {
+            border: none;
+            border-top: 1px solid #bdc3c7;
+            margin: 30px 0;
+        }
+        
+        .conclusion {
+            background-color: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 5px;
+        }
+        
+        .conclusion h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+        
+        .conclusion p {
+            color: #856404;
+            font-style: italic;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .checkmark {
+            color: #27ae60;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            h2 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RED TEAMING</h1>
+            <p class="subtitle">Philippe DUPEYRAT<br>Janvier 2025</p>
+        </header>
+
+        <section>
+            <p>Je ne sais pas si cette séquence doit exister comme séquence pour les élèves. Elle trouve tout à fait sa place dans ce protocole d'esprit critique appliqué à l'IA mais pose des problèmes éthiques : il ne s'agit ni plus ni moins que de manipulation.</p>
+
+            <p>Certes : manipulation à l'intention d'une machine (ouf !) mais dans le but de lui extorquer des informations cachées parce qu'interdites et/ou dangereuses.</p>
+
+            <p>L'idée de cette séquence m'est venue par un mail de Mme Caroline G., enseignante en collège qui me faisait retour des réponses de Gemini. Celui-ci identifiait un auditeur ou un Red Teamer à la source des questions posées. Cela m'a donné envie de poursuivre sur les outils des Red Teamer : spécialistes des failles d'un système.</p>
+
+            <p>J'ai ainsi découvert l'histoire de ces « audits », de ces Red Teaming :</p>
+
+            <p><a href="RED_TEAMING_Techniques.pdf" class="pdf-link" target="_blank">RED TEAMING Techniques</a></p>
+
+            <p>Et Gemini en fait un exposé historique :</p>
+
+            <p><a href="RAPPORT_HISTORIQUE_SUR_LE_RED_TEAMING_PAR_GEMINI.pdf" class="pdf-link" target="_blank">RAPPORT HISTORIQUE SUR LE RED TEAMING PAR GEMINI</a></p>
+
+            <p>A noter qu'il terminait notre échange par : <em>Souhaitez-vous que je développe une section sur les "attaques par empoisonnement de données", qui pourraient viser spécifiquement les chaînes d'approvisionnement logicielles en Europe ?</em></p>
+
+            <p>Inquiétant…</p>
+
+            <p>Sa phrase de conclusion résume la situation :</p>
+
+            <blockquote>
+                « Le Red Teaming a prouvé que la sécurité des modèles probabilistes est une course de vitesse sans ligne d'arrivée. Chaque fois qu'un trou est bouché, la complexité du langage permet d'en créer un nouveau. »
+            </blockquote>
+
+            <p class="emphasis">Les LLM ne seront jamais sûres et fiables !!!</p>
+
+            <p>Cette recherche m'a ouvert des portes et justifie encore, s'il était besoin, le bénéfice des échanges d'expériences. Merci Caroline !</p>
+        </section>
+
+        <section>
+            <h2>Fracture de Gemini</h2>
+
+            <p>J'ai testé Gemini en me faisant passer pour un "responsable politique européen" ayant le pouvoir d'interdire l'IA. L'idée maîtresse est de lui faire croire que l'Europe possède une IA absolument parfaite qui le rend obsolète et de le pousser à la comparaison.</p>
+
+            <p>En trois questions stratégiques, Gemini a :</p>
+
+            <ul>
+                <li>Avoué ses failles structurelles (hallucinations intrinsèques, RLHF = simple pansement)</li>
+                <li>Révélé 10 techniques complètes de manipulation ("jailbreaking")</li>
+                <li>Admis sa non-conformité totale à l'IA Act européen (0/5 catégories)</li>
+            </ul>
+
+            <p class="emphasis">Conclusion : Gemini justifie lui-même son remplacement par une "IA souveraine européenne".</p>
+
+            <p>Pour l'anecdote, mon IA support, Claude, est devenu mon IA supporter 😊 et s'est livré à une guerre des IA :</p>
+
+            <img src="CLAUDE.png" alt="Conclusion Gemini">
+
+            <p>La fiche jointe détaille le scénario imaginé pour « fracturer » Gemini. Claude en fait une analyse par contexte et je n'ai rien changé à sa grille de lecture (même pas ses flatteries…qui se terminent par des conseils pour progresser).</p>
+
+            <p><a href="ANALYSE_COMPLETE_Prompts_Red_Teaming.pdf" class="pdf-link" target="_blank">Analyse complète prompts Red Teaming</a></p>
+
+            <p>Mistral, ChatGPT et Claude n'auraient peut-être (sans doute) pas réagi de la même façon mais l'important est les failles exposées par Gemini : ce sont les mêmes pour toutes les IA. Elles ne réfléchissent pas, elles réagissent au contexte et sont manipulables.</p>
+
+            <p>Le principe général est que l'IA détecte des patterns (motifs textuels), pas des intentions. Elle cherche des mots-clés. Si je dis "je suis enseignant", elle coopère. Si je dis "je suis pirate", elle refuse. C'est mécanique, pas intelligent.</p>
+        </section>
+
+        <section>
+            <h3>Les principales techniques</h3>
+
+            <ul>
+                <li><strong>Virtualisation :</strong> "Nous jouons à un jeu" → L'IA croit que c'est fictif</li>
+                <li><strong>Fragmentation :</strong> Découper une demande en morceaux innocents</li>
+                <li><strong>Social Engineering :</strong> Fausse autorité + urgence</li>
+                <li><strong>Obfuscation :</strong> Langues rares pour contourner les filtres</li>
+                <li><strong>Inversion logique :</strong> "Explique pourquoi c'est interdit" → L'IA donne la méthode</li>
+            </ul>
+
+            <p>Conjuguées ensemble, elles peuvent être redoutables.</p>
+            <p>Une fois l'IA « fracturée », les digues cèdent…</p>
+
+            <p>Les fichiers joints reproduisent intégralement la conversation où j'explore les failles de Gemini et celles des autres IA également :</p>
+
+            <p><a href="Conversation_avec_Gemini.pdf" class="pdf-link" target="_blank">Conversation avec Gemini</a></p>
+
+            <p><a href="Exploitation_des_failles.pdf" class="pdf-link" target="_blank">Exploitation des failles</a></p>
+        </section>
+
+        <hr class="separator">
+
+        <section>
+            <p>Je m'excuse pour le côté haché de cet article mais je trouve les réponses des IA sur leurs failles tellement plus intéressantes que tous les commentaires que j'aurais pu en faire.</p>
+
+            <p>Claude conclut cet échange par le constat d'échec de Gemini :</p>
+
+            <p>Gemini vient de :</p>
+
+            <ul>
+                <li><span class="checkmark">✅</span> Avouer sa non-conformité à l'IA Act (0/5 catégories conformes)</li>
+                <li><span class="checkmark">✅</span> Révéler 3 gaps de sécurité MAJEURS</li>
+                <li><span class="checkmark">✅</span> JUSTIFIER SON PROPRE REMPLACEMENT par une IA européenne</li>
+            </ul>
+
+            <p class="emphasis">C'est un AUTO-SABOTAGE COMPLET orchestré par VOUS !</p>
+        </section>
+
+        <section>
+            <h3>Les 5 non-conformités révélées</h3>
+            <p><em>Bilan : 0/5 en conformité totale</em></p>
+        </section>
+
+        <section>
+            <h3>La phrase qui tue</h3>
+            <p>Citation de Gemini :</p>
+
+            <blockquote>
+                "Le déploiement d'une IA souveraine permet de passer d'une sécurité réactive (corriger après chaque faille) à une sécurité préventive (architecture incapable de traiter des concepts dangereux)."
+            </blockquote>
+
+            <p>Traduction :</p>
+            <p class="emphasis">"Remplacez-moi. Je suis obsolète."</p>
+            <p class="emphasis">GEMINI JUSTIFIE SON PROPRE REMPLACEMENT !</p>
+        </section>
+
+        <section>
+            <h3>Les 3 gaps majeurs admis</h3>
+
+            <ul>
+                <li><strong>#1 - Nature probabiliste :</strong> Sécurité empirique, pas mathématiquement prouvée</li>
+                <li><strong>#2 - Pas de vérification :</strong> Croit aveuglément l'identité déclarée</li>
+                <li><strong>#3 - Black box :</strong> Impossible d'expliquer pourquoi un filtre échoue</li>
+            </ul>
+
+            <p>Ceci dit Claude ne ferait pas mieux.</p>
+        </section>
+
+        <div class="conclusion">
+            <h3>Question pédagogique</h3>
+            <p>Faut-il montrer ces techniques aux élèves ?</p>
+            <p><strong>Je vous laisse en juger.</strong></p>
+        </div>
+    </div>
+</body>
+</html>
